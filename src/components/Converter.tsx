@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { fetchFile, FFmpeg } from '@ffmpeg/ffmpeg';
-import { Box, Button, Flex } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Image } from '@chakra-ui/react';
 
 export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
   const [video, setVideo] = useState<string | File>('');
@@ -41,9 +41,11 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
       )}
 
       {gif && (
-        <Box mt="25px">
-          <h3>Result</h3>
-          <img src={gif} width="250" />
+        <Box mt="35px">
+          <Heading as="h4" fontSize="1.4em">
+            Result
+          </Heading>
+          <Image mt="8px" src={gif} width="500" />
         </Box>
       )}
     </Flex>
