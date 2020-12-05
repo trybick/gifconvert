@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "main": "build/electron/main.js",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cross-env PORT=4002 react-scripts start",
     "build": "react-scripts build",
     "postinstall": "electron-builder install-app-deps",
-    "electron:dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && tsc -p electron -w\" \"wait-on http://localhost:3000 && tsc -p electron && electron .\"",
+    "electron:dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:4002 && tsc -p electron -w\" \"wait-on http://localhost:4002 && tsc -p electron && electron .\"",
     "electron:build": "yarn build && tsc -p electron && electron-builder"
   },
   "build": {
@@ -44,8 +44,21 @@
   },
   "devDependencies": {
     "concurrently": "^5.3.0",
+    "cross-env": "^7.0.3",
     "electron": "^11.0.3",
     "electron-builder": "^22.9.1",
     "wait-on": "^5.2.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
