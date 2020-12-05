@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { createFFmpeg } from '@ffmpeg/ffmpeg';
+import { Box } from '@chakra-ui/react';
 import Converter from './components/Converter';
 import LoadingSpinner from './components/LoadingSpinner';
 
@@ -17,7 +18,13 @@ function App() {
     loadConverter();
   }, []);
 
-  return isReady ? <Converter ffmpeg={ffmpeg} /> : <LoadingSpinner />;
+  return isReady ? (
+    <Box padding="50px">
+      <Converter ffmpeg={ffmpeg} />
+    </Box>
+  ) : (
+    <LoadingSpinner />
+  );
 }
 
 export default App;
