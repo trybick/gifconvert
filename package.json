@@ -22,6 +22,8 @@
     "@chakra-ui/react": "^1.0.2",
     "@emotion/react": "^11.1.1",
     "@emotion/styled": "^11.0.0",
+    "@ffmpeg/core": "^0.8.5",
+    "@ffmpeg/ffmpeg": "^0.9.6",
     "@types/electron-devtools-installer": "^2.2.0",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.53",
