@@ -1,10 +1,14 @@
 import { ChangeEvent, useState } from 'react';
 import { fetchFile, FFmpeg } from '@ffmpeg/ffmpeg';
-import { Box, Button, Flex, Heading, Image } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Image, Spinner, Text } from '@chakra-ui/react';
+
+const framesRegex = /(?<=frame=)(.*)(?=fps)/;
 
 export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
   const [video, setVideo] = useState<string | File>('');
   const [gif, setGif] = useState('');
+  const [isConverting, setIsConverting] = useState(false);
+  const [numFramesProcessed, setNumFramesProcessed] = useState<string | null>('');
   const videoUrl = video && URL.createObjectURL(video);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -13,11 +17,18 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
   };
 
   const convertToGif = async () => {
+    setIsConverting(true);
+    ffmpeg.setLogger(({ message }) => {
+      const framesSearchResult = message.match(framesRegex);
+      const numFrames = framesSearchResult && framesSearchResult[0].trim();
+      setNumFramesProcessed(numFrames);
+    });
     ffmpeg.FS('writeFile', 'in.mp4', await fetchFile(video));
     await ffmpeg.run('-i', 'in.mp4', '-t', '2.5', '-ss', '2.0', '-f', 'gif', 'out.gif');
     const data = ffmpeg.FS('readFile', 'out.gif');
     const url = URL.createObjectURL(new Blob([data.buffer], { type: 'image/gif' }));
     setGif(url);
+    setIsConverting(false);
   };
 
   return (
@@ -37,6 +48,13 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
       {video && (
         <Box mt="25px">
           <Button onClick={convertToGif}>Convert</Button>
+        </Box>
+      )}
+
+      {isConverting && (
+        <Box>
+          <Text>{numFramesProcessed} frames processed</Text>
+          <Spinner label="converting" size="xl" thickness="3px" />
         </Box>
       )}
 
