@@ -4,7 +4,7 @@ import { createWindow } from './helpers/startup';
 const mainWindow: BrowserWindow | null = null;
 
 function init() {
-  createWindow(mainWindow, { devToolsOnStartup: false });
+  createWindow(mainWindow, { devToolsOnStartup: true });
 }
 
 app.on('ready', () => {
