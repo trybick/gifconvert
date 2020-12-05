@@ -1,6 +1,7 @@
 {
   "name": "gif-tray",
   "version": "0.1.0",
+  "license": "ISC",
   "main": "build/electron/main.js",
   "scripts": {
     "start": "cross-env PORT=4002 react-scripts start",
