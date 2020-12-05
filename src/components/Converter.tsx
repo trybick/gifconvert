@@ -21,22 +21,31 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
   };
 
   return (
-    <Box>
-      <input type="file" onChange={handleFileChange} />
+    <Flex alignItems="center" direction="column">
+      <Box minH="170px">
+        {video && (
+          <Box>
+            <video controls width="300" src={videoUrl}></video>
+          </Box>
+        )}
+      </Box>
+
+      <Box mt="25px">
+        <input type="file" onChange={handleFileChange} />
+      </Box>
 
       {video && (
-        <Box>
-          <video controls width="300" src={videoUrl}></video>
+        <Box mt="25px">
           <Button onClick={convertToGif}>Convert</Button>
         </Box>
       )}
 
       {gif && (
-        <Box>
+        <Box mt="25px">
           <h3>Result</h3>
           <img src={gif} width="250" />
         </Box>
       )}
-    </Box>
+    </Flex>
   );
 }
