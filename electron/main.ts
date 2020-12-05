@@ -17,27 +17,23 @@ function createWindow() {
 
   if (isDev) {
     mainWindow.loadURL('http://localhost:4002/index.html');
-  } else {
-    mainWindow.loadURL(`file://${__dirname}/../index.html`);
-  }
 
-  mainWindow.on('closed', () => (mainWindow = null));
-
-  if (isDev) {
     require('electron-reload')(__dirname, {
       electron: path.join(__dirname, '..', '..', 'node_modules', '.bin', 'electron'),
       forceHardReset: true,
       hardResetMethod: 'exit',
     });
+
+    mainWindow.webContents.openDevTools();
+  } else {
+    mainWindow.loadURL(`file://${__dirname}/../index.html`);
   }
 
   installExtension(REACT_DEVELOPER_TOOLS)
     .then((name) => console.log(`Added Extension:  ${name}`))
     .catch((err) => console.log('An error occurred: ', err));
 
-  if (isDev) {
-    mainWindow.webContents.openDevTools();
-  }
+  mainWindow.on('closed', () => (mainWindow = null));
 }
 
 app.on('ready', createWindow);
