@@ -10,6 +10,7 @@ function createWindow() {
     width: 800,
     height: 600,
     webPreferences: {
+      contextIsolation: true,
       nodeIntegration: true,
     },
   });
@@ -17,7 +18,6 @@ function createWindow() {
   if (isDev) {
     win.loadURL('http://localhost:4002/index.html');
   } else {
-    // 'build/index.html'
     win.loadURL(`file://${__dirname}/../index.html`);
   }
 
