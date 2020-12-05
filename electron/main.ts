@@ -1,7 +1,7 @@
 import { app, BrowserWindow } from 'electron';
 import { createWindow } from './helpers/startup';
 
-let mainWindow: BrowserWindow | null = null;
+const mainWindow: BrowserWindow | null = null;
 
 function init() {
   createWindow(mainWindow, { devToolsOnStartup: false });
