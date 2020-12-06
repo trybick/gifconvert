@@ -7,8 +7,11 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
   const [video, setVideo] = useState<string | File>('');
   const [gif, setGif] = useState('');
   const [isConverting, setIsConverting] = useState(false);
-  const [numFramesProcessed, setNumFramesProcessed] = useState<string | null>('0');
+  const [numFramesProcessed, setNumFramesProcessed] = useState(0);
   const videoUrl = video && URL.createObjectURL(video);
+  const numFramesForDisplay = !numFramesProcessed
+    ? 'Initializing'
+    : `Frames processed: ${numFramesProcessed}`;
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.item(0);
@@ -18,8 +21,8 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
   const convertToGif = async () => {
     setIsConverting(true);
     ffmpeg.setLogger(({ message }) => {
-      const framesSearchResult = message.match(framesRegex);
-      const numFrames = framesSearchResult && framesSearchResult[0].trim();
+      const framesData = message.match(framesRegex);
+      const numFrames = framesData && +framesData[0].trim();
       if (numFrames !== null) {
         setNumFramesProcessed(numFrames);
       }
@@ -51,15 +54,17 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
 
       {video && (
         <Box mt="25px">
-          <Button onClick={convertToGif}>Convert</Button>
+          <Button isDisabled={isConverting} onClick={convertToGif}>
+            Convert
+          </Button>
         </Box>
       )}
 
       {isConverting && (
-        <Box>
-          <Text>{numFramesProcessed} frames processed</Text>
-          <Spinner label="converting" size="xl" thickness="3px" />
-        </Box>
+        <Flex alignItems="center" direction="column" mt="15px">
+          <Text>{numFramesForDisplay}</Text>
+          <Spinner label="converting" mt="20px" size="xl" textAlign="center" thickness="3px" />
+        </Flex>
       )}
 
       {gif && (
@@ -70,7 +75,7 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
           <Image mt="8px" src={gif} width="500" />
           <Flex alignItems="center" justifyContent="center" mt="30px">
             <Link href={gif} download>
-              <Button>Download</Button>
+              <Button>Download GIF</Button>
             </Link>
           </Flex>
         </Box>
