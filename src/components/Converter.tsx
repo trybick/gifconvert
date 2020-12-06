@@ -2,13 +2,14 @@ import { ChangeEvent, useState } from 'react';
 import { fetchFile, FFmpeg } from '@ffmpeg/ffmpeg';
 import { Box, Button, Flex, Heading, Image, Link, Spinner, Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
-import { framesRegex } from '../constants/strings';
+import { framesRegex, totalSizeRegex } from '../constants/strings';
 
 export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
   const [video, setVideo] = useState<string | File>('');
   const [gif, setGif] = useState('');
   const [isConverting, setIsConverting] = useState(false);
   const [numFramesProcessed, setNumFramesProcessed] = useState(0);
+  const [totalSize, setTotalSize] = useState('');
   const videoUrl = video && URL.createObjectURL(video);
   const numFramesForDisplay = !numFramesProcessed
     ? 'Initializing'
@@ -20,15 +21,24 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
     file && setVideo(file);
   };
 
+  const handleLogs = ({ message }: { message: string }) => {
+    // Frames
+    const framesData = message.match(framesRegex);
+    const numFrames = framesData && +framesData[0].trim();
+    if (numFrames !== null) {
+      setNumFramesProcessed(numFrames);
+    }
+    // Size
+    const totalSizeData = message.match(totalSizeRegex);
+    const totalSize = totalSizeData && totalSizeData[0].trim();
+    if (totalSize !== null) {
+      totalSize && setTotalSize(totalSize);
+    }
+  };
+
   const convertToGif = async () => {
     setIsConverting(true);
-    ffmpeg.setLogger(({ message }) => {
-      const framesData = message.match(framesRegex);
-      const numFrames = framesData && +framesData[0].trim();
-      if (numFrames !== null) {
-        setNumFramesProcessed(numFrames);
-      }
-    });
+    ffmpeg.setLogger(handleLogs);
     ffmpeg.FS('writeFile', 'in.mov', await fetchFile(video));
     await ffmpeg.run('-i', 'in.mov', '-t', '2.5', '-ss', '2.0', '-f', 'gif', 'out.gif');
     const data = ffmpeg.FS('readFile', 'out.gif');
@@ -80,8 +90,11 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
       {gif && (
         <Box mt="55px">
           <Image src={gif} width="500px" />
-          <Flex alignItems="center" justifyContent="center" mt="20px">
-            <Link href={gif} download>
+          <Flex alignItems="center" direction="column" justifyContent="center" mt="12px">
+            <Text fontSize="14px" fontWeight="500" mt="0px">
+              Size: {totalSize}
+            </Text>
+            <Link href={gif} mt="12px" download>
               <Button>Download GIF</Button>
             </Link>
           </Flex>
