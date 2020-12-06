@@ -24,8 +24,8 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
         setNumFramesProcessed(numFrames);
       }
     });
-    ffmpeg.FS('writeFile', 'in.mp4', await fetchFile(video));
-    await ffmpeg.run('-i', 'in.mp4', '-t', '2.5', '-ss', '2.0', '-f', 'gif', 'out.gif');
+    ffmpeg.FS('writeFile', 'in.mov', await fetchFile(video));
+    await ffmpeg.run('-i', 'in.mov', '-t', '2.5', '-ss', '2.0', '-f', 'gif', 'out.gif');
     const data = ffmpeg.FS('readFile', 'out.gif');
     const url = URL.createObjectURL(new Blob([data.buffer], { type: 'image/gif' }));
     setGif(url);
