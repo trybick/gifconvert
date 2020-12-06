@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import { fetchFile, FFmpeg } from '@ffmpeg/ffmpeg';
 import { Box, Button, Flex, Heading, Image, Link, Spinner, Text } from '@chakra-ui/react';
+import { DownloadIcon, PlusSquareIcon } from '@chakra-ui/icons';
 import styled from '@emotion/styled';
 import { framesRegex, totalSizeRegex } from '../constants/strings';
 
@@ -67,8 +68,9 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
           <Button
             as="label"
             colorScheme="teal"
-            htmlFor="input"
             cursor="pointer"
+            htmlFor="input"
+            leftIcon={<PlusSquareIcon />}
             size="lg"
             variant="outline"
           >
@@ -108,7 +110,7 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
               Size: {totalSize}
             </Text>
             <Link href={gif} mt="12px" download>
-              <Button colorScheme="teal" size="lg">
+              <Button colorScheme="teal" leftIcon={<DownloadIcon />} size="lg">
                 Download GIF
               </Button>
             </Link>
