@@ -43,7 +43,7 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
       <Box minH="170px">
         {video && !isConverting && (
           <Box>
-            <Heading as="h4" fontSize="1.4em" mb="10px">
+            <Heading as="h4" fontSize="1.2em" mb="10px">
               Input
             </Heading>
             <video src={videoUrl} width="300" controls></video>
@@ -73,7 +73,7 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
 
       {gif && (
         <Box mt="55px">
-          <Image src={gif} width="500" />
+          <Image src={gif} width="500px" />
           <Flex alignItems="center" justifyContent="center" mt="20px">
             <Link href={gif} download>
               <Button>Download GIF</Button>
