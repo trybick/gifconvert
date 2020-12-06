@@ -54,7 +54,7 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
       <Box mt="25px">
         <FileInput id="input" type="file" onChange={handleFileChange} />
         <Button as="label" htmlFor="input">
-          btn
+          Select file
         </Button>
       </Box>
 
@@ -66,10 +66,12 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
         </Box>
       )}
 
-      {isConverting && (
-        <Flex alignItems="center" direction="column" mt="15px">
-          <Text>{numFramesForDisplay}</Text>
-          <Spinner label="converting" mt="20px" size="xl" textAlign="center" thickness="3px" />
+      {!isConverting && (
+        <Flex alignItems="center" direction="column" mt="70px">
+          <Spinner label="converting" size="lg" textAlign="center" thickness="3px" />
+          <Text fontSize="18px" mt="20px">
+            {numFramesForDisplay}
+          </Text>
         </Flex>
       )}
 
