@@ -1,8 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import { fetchFile, FFmpeg } from '@ffmpeg/ffmpeg';
 import { Box, Button, Flex, Heading, Image, Spinner, Text } from '@chakra-ui/react';
-
-const framesRegex = /(?<=frame=)(.*)(?=fps)/;
+import { framesRegex } from '../constants/strings';
 
 export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
   const [video, setVideo] = useState<string | File>('');
