@@ -1,7 +1,32 @@
 import { ChangeEvent, useState } from 'react';
 import { fetchFile, FFmpeg } from '@ffmpeg/ffmpeg';
 import { Box, Button, Flex, Heading, Image, Link, Spinner, Text } from '@chakra-ui/react';
+import styled from '@emotion/styled';
 import { framesRegex } from '../constants/strings';
+
+const FileInput = styled.input`
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+`;
+
+const FileLabel = styled.label`
+  display: block;
+  position: relative;
+  width: 200px;
+  height: 50px;
+  border-radius: 25px;
+  background: linear-gradient(40deg, #ff6ec4, #7873f5);
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease-out;
+`;
 
 export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
   const [video, setVideo] = useState<string | File>('');
@@ -14,6 +39,8 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
     : `Frames processed: ${numFramesProcessed}`;
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setVideo('');
+    setGif('');
     const file = e.target.files?.item(0);
     file && setVideo(file);
   };
@@ -32,13 +59,14 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
     const data = ffmpeg.FS('readFile', 'out.gif');
     const url = URL.createObjectURL(new Blob([data.buffer], { type: 'image/gif' }));
     setGif(url);
+    setVideo('');
     setIsConverting(false);
   };
 
   return (
     <Flex alignItems="center" direction="column">
       <Box minH="170px">
-        {video && (
+        {video && !isConverting && (
           <Box>
             <Heading as="h4" fontSize="1.4em" mb="10px">
               Input
@@ -49,7 +77,8 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
       </Box>
 
       <Box mt="25px">
-        <input type="file" onChange={handleFileChange} />
+        <FileInput id="input" type="file" onChange={handleFileChange} />
+        <FileLabel htmlFor="input">Select file</FileLabel>
       </Box>
 
       {video && (
@@ -68,12 +97,9 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
       )}
 
       {gif && (
-        <Box mt="35px">
-          <Heading as="h4" fontSize="1.4em">
-            Result
-          </Heading>
-          <Image mt="8px" src={gif} width="500" />
-          <Flex alignItems="center" justifyContent="center" mt="30px">
+        <Box mt="55px">
+          <Image src={gif} width="500" />
+          <Flex alignItems="center" justifyContent="center" mt="20px">
             <Link href={gif} download>
               <Button>Download GIF</Button>
             </Link>
