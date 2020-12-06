@@ -10,8 +10,8 @@ const port = 4002;
 
 function init() {
   mainWindow = new BrowserWindow({
-    width: 1200,
-    height: 1000,
+    width: 600,
+    height: 825,
     webPreferences: {
       contextIsolation: true,
       nodeIntegration: true,

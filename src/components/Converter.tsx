@@ -51,19 +51,19 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
 
   return (
     <Flex alignItems="center" direction="column">
-      <Box minH="170px">
+      <Box minH="210px">
         {video && !isConverting && (
           <Box>
             <Heading as="h4" fontSize="1.2em" mb="10px">
               Input
             </Heading>
-            <video src={videoUrl} width="300"></video>
+            <video src={videoUrl} style={{ height: 180 }}></video>
           </Box>
         )}
       </Box>
 
       {!isConverting && (
-        <Box mt="25px">
+        <Box mt="14px">
           <FileInput id="input" type="file" onChange={handleFileChange} />
           <Button
             as="label"
@@ -80,7 +80,7 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
       )}
 
       {video && !isConverting && (
-        <Box mt="25px">
+        <Box mt="30px">
           <Button colorScheme="teal" isDisabled={isConverting} onClick={convertToGif} size="lg">
             Convert
           </Button>
