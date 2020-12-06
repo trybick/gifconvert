@@ -64,7 +64,14 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
       {!isConverting && (
         <Box mt="25px">
           <FileInput id="input" type="file" onChange={handleFileChange} />
-          <Button as="label" htmlFor="input" cursor="pointer">
+          <Button
+            as="label"
+            colorScheme="teal"
+            htmlFor="input"
+            cursor="pointer"
+            size="lg"
+            variant="outline"
+          >
             Select file
           </Button>
         </Box>
@@ -72,7 +79,7 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
 
       {video && !isConverting && (
         <Box mt="25px">
-          <Button isDisabled={isConverting} onClick={convertToGif}>
+          <Button colorScheme="teal" isDisabled={isConverting} onClick={convertToGif} size="lg">
             Convert
           </Button>
         </Box>
@@ -80,8 +87,14 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
 
       {isConverting && (
         <Flex alignItems="center" direction="column" mt="70px">
-          <Spinner label="converting" size="lg" textAlign="center" thickness="3px" />
-          <Text fontSize="18px" mt="20px">
+          <Spinner
+            color="teal.500"
+            label="converting"
+            size="lg"
+            textAlign="center"
+            thickness="3px"
+          />
+          <Text fontSize="18px" mt="26px">
             {numFramesForDisplay}
           </Text>
         </Flex>
@@ -95,7 +108,9 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
               Size: {totalSize}
             </Text>
             <Link href={gif} mt="12px" download>
-              <Button>Download GIF</Button>
+              <Button colorScheme="teal" size="lg">
+                Download GIF
+              </Button>
             </Link>
           </Flex>
         </Box>
