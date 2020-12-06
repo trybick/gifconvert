@@ -4,30 +4,6 @@ import { Box, Button, Flex, Heading, Image, Link, Spinner, Text } from '@chakra-
 import styled from '@emotion/styled';
 import { framesRegex } from '../constants/strings';
 
-const FileInput = styled.input`
-  opacity: 0;
-  width: 0.1px;
-  height: 0.1px;
-  position: absolute;
-`;
-
-const FileLabel = styled.label`
-  display: block;
-  position: relative;
-  width: 200px;
-  height: 50px;
-  border-radius: 25px;
-  background: linear-gradient(40deg, #ff6ec4, #7873f5);
-  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-  transition: transform 0.2s ease-out;
-`;
-
 export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
   const [video, setVideo] = useState<string | File>('');
   const [gif, setGif] = useState('');
@@ -81,7 +57,7 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
         <FileLabel htmlFor="input">Select file</FileLabel>
       </Box>
 
-      {video && (
+      {video && !isConverting && (
         <Box mt="25px">
           <Button isDisabled={isConverting} onClick={convertToGif}>
             Convert
@@ -109,3 +85,27 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
     </Flex>
   );
 }
+
+const FileInput = styled.input`
+  height: 0.1px;
+  opacity: 0;
+  position: absolute;
+  width: 0.1px;
+`;
+
+const FileLabel = styled.label`
+  align-items: center;
+  background: linear-gradient(40deg, #ff6ec4, #7873f5);
+  border-radius: 25px;
+  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
+  color: #fff;
+  cursor: pointer;
+  display: block;
+  display: flex;
+  font-weight: bold;
+  height: 50px;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.2s ease-out;
+  width: 200px;
+`;
