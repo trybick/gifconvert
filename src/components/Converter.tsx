@@ -46,17 +46,19 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
             <Heading as="h4" fontSize="1.2em" mb="10px">
               Input
             </Heading>
-            <video src={videoUrl} width="300" controls></video>
+            <video src={videoUrl} width="300"></video>
           </Box>
         )}
       </Box>
 
-      <Box mt="25px">
-        <FileInput id="input" type="file" onChange={handleFileChange} />
-        <Button as="label" htmlFor="input">
-          Select file
-        </Button>
-      </Box>
+      {!isConverting && (
+        <Box mt="25px">
+          <FileInput id="input" type="file" onChange={handleFileChange} />
+          <Button as="label" htmlFor="input">
+            Select file
+          </Button>
+        </Box>
+      )}
 
       {video && !isConverting && (
         <Box mt="25px">
@@ -66,7 +68,7 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
         </Box>
       )}
 
-      {!isConverting && (
+      {isConverting && (
         <Flex alignItems="center" direction="column" mt="70px">
           <Spinner label="converting" size="lg" textAlign="center" thickness="3px" />
           <Text fontSize="18px" mt="20px">
