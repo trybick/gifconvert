@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { fetchFile, FFmpeg } from '@ffmpeg/ffmpeg';
-import { Box, Button, Flex, Heading, Image, Spinner, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Image, Link, Spinner, Text } from '@chakra-ui/react';
 import { framesRegex } from '../constants/strings';
 
 export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
@@ -37,7 +37,10 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
       <Box minH="170px">
         {video && (
           <Box>
-            <video controls width="300" src={videoUrl}></video>
+            <Heading as="h4" fontSize="1.4em" mb="10px">
+              Input
+            </Heading>
+            <video src={videoUrl} width="300" controls></video>
           </Box>
         )}
       </Box>
@@ -65,6 +68,11 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
             Result
           </Heading>
           <Image mt="8px" src={gif} width="500" />
+          <Flex alignItems="center" justifyContent="center" mt="30px">
+            <Link href={gif} download>
+              <Button>Download</Button>
+            </Link>
+          </Flex>
         </Box>
       )}
     </Flex>
