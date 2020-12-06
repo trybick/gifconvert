@@ -15,7 +15,6 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
     : `Frames processed: ${numFramesProcessed}`;
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setVideo('');
     setGif('');
     const file = e.target.files?.item(0);
     file && setVideo(file);
