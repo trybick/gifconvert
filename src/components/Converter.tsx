@@ -57,7 +57,7 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
             <Heading as="h4" fontSize="1.2em" mb="10px">
               Input
             </Heading>
-            <video src={videoUrl} style={{ height: 180 }}></video>
+            <VideoHolder src={videoUrl}></VideoHolder>
           </Box>
         )}
       </Box>
@@ -120,6 +120,10 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
     </Flex>
   );
 }
+
+const VideoHolder = styled.video`
+  height: 180px;
+`;
 
 const FileInput = styled.input`
   height: 0.1px;
