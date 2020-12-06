@@ -54,7 +54,7 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
       {!isConverting && (
         <Box mt="25px">
           <FileInput id="input" type="file" onChange={handleFileChange} />
-          <Button as="label" htmlFor="input">
+          <Button as="label" htmlFor="input" cursor="pointer">
             Select file
           </Button>
         </Box>
