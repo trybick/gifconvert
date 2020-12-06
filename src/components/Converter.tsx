@@ -104,7 +104,7 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
 
       {gif && (
         <Box mt="55px">
-          <Image src={gif} width="500px" />
+          <Image src={gif} height="200px" />
           <Flex alignItems="center" direction="column" justifyContent="center" mt="12px">
             <Text fontSize="14px" fontWeight="500" mt="0px">
               Size: {totalSize}
