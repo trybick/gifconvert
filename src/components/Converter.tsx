@@ -53,7 +53,9 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
 
       <Box mt="25px">
         <FileInput id="input" type="file" onChange={handleFileChange} />
-        <FileLabel htmlFor="input">Select file</FileLabel>
+        <Button as="label" htmlFor="input">
+          btn
+        </Button>
       </Box>
 
       {video && !isConverting && (
@@ -90,21 +92,4 @@ const FileInput = styled.input`
   opacity: 0;
   position: absolute;
   width: 0.1px;
-`;
-
-const FileLabel = styled.label`
-  align-items: center;
-  background: linear-gradient(40deg, #ff6ec4, #7873f5);
-  border-radius: 25px;
-  box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
-  color: #fff;
-  cursor: pointer;
-  display: block;
-  display: flex;
-  font-weight: bold;
-  height: 50px;
-  justify-content: center;
-  position: relative;
-  transition: transform 0.2s ease-out;
-  width: 200px;
 `;
