@@ -1,6 +1,6 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { fetchFile, FFmpeg } from '@ffmpeg/ffmpeg';
-import { Box, Button, Flex, Heading, Image, Link, Spinner, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Image, Link, Spinner, Text } from '@chakra-ui/react';
 import { DownloadIcon, PlusSquareIcon } from '@chakra-ui/icons';
 import styled from '@emotion/styled';
 import { framesRegex, totalSizeRegex } from '../constants/strings';
@@ -11,10 +11,13 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
   const [isConverting, setIsConverting] = useState(false);
   const [numFramesProcessed, setNumFramesProcessed] = useState(0);
   const [totalSize, setTotalSize] = useState('');
-  const videoUrl = video && URL.createObjectURL(video);
   const numFramesForDisplay = !numFramesProcessed
     ? 'Initializing'
     : `Frames processed: ${numFramesProcessed}`;
+
+  useEffect(() => {
+    video && convertToGif();
+  }, [video]);
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     setGif('');
@@ -51,17 +54,6 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
 
   return (
     <Flex alignItems="center" direction="column">
-      <Box minH="210px">
-        {video && !isConverting && (
-          <Box>
-            <Heading as="h4" fontSize="1.2em" mb="10px">
-              Input
-            </Heading>
-            <VideoHolder src={videoUrl}></VideoHolder>
-          </Box>
-        )}
-      </Box>
-
       {!isConverting && (
         <Box mt="14px">
           <FileInput id="input" type="file" onChange={handleFileChange} />
@@ -75,14 +67,6 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
             variant="outline"
           >
             Select file
-          </Button>
-        </Box>
-      )}
-
-      {video && !isConverting && (
-        <Box mt="30px">
-          <Button colorScheme="teal" isDisabled={isConverting} onClick={convertToGif} size="lg">
-            Convert
           </Button>
         </Box>
       )}
@@ -120,10 +104,6 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
     </Flex>
   );
 }
-
-const VideoHolder = styled.video`
-  height: 180px;
-`;
 
 const FileInput = styled.input`
   height: 0.1px;
