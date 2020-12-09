@@ -93,7 +93,13 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
             <Text fontSize="14px" fontWeight="500" mt="0px">
               Size: {totalSize}
             </Text>
-            <Link href={gif} mt="12px" download>
+            <Link
+              href={gif}
+              mt="12px"
+              textDecor="none"
+              _hover={{ textDecoration: 'none' }}
+              download
+            >
               <Button colorScheme="teal" leftIcon={<DownloadIcon />} size="lg">
                 Download GIF
               </Button>
