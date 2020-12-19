@@ -83,12 +83,14 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
 
   return (
     <Flex alignItems="center" direction="column">
-      <FormControl display="flex" alignItems="center">
-        <Switch id="large-file-mode-switch" onChange={handleLargeFileModeChange} size="md" />
-        <FormLabel htmlFor="large-file-mode-switch" m="0 6px 0">
-          Large file mode
-        </FormLabel>
-      </FormControl>
+      {!isConverting && (
+        <FormControl alignItems="center" display="flex" justifyContent="flex-end" mb="25px">
+          <FormLabel fontSize="15px" htmlFor="large-file-mode-switch" m="0 6px 0">
+            Large file mode
+          </FormLabel>
+          <Switch id="large-file-mode-switch" onChange={handleLargeFileModeChange} size="md" />
+        </FormControl>
+      )}
 
       {!isConverting && (
         <Box mt="14px">

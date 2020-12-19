@@ -19,7 +19,7 @@ function App() {
   }, []);
 
   return isReady ? (
-    <Box maxW="600px" overflow="hidden" padding="50px">
+    <Box maxW="600px" overflow="hidden" padding="25px">
       <Converter ffmpeg={ffmpeg} />
     </Box>
   ) : (
