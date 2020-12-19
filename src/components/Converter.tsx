@@ -1,6 +1,17 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { fetchFile, FFmpeg } from '@ffmpeg/ffmpeg';
-import { Box, Button, Flex, Image, Link, Spinner, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Image,
+  Link,
+  Spinner,
+  Switch,
+  Text,
+} from '@chakra-ui/react';
 import { DownloadIcon, PlusSquareIcon } from '@chakra-ui/icons';
 import styled from '@emotion/styled';
 import { framesRegex, totalSizeRegex } from '../constants/strings';
@@ -11,6 +22,7 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
   const [isConverting, setIsConverting] = useState(false);
   const [numFramesProcessed, setNumFramesProcessed] = useState(0);
   const [totalSize, setTotalSize] = useState('');
+  const [isLargeFileModeEnabled, setIsLargeFileModeEnabled] = useState(false);
   const numFramesForDisplay = !numFramesProcessed
     ? 'Initializing'
     : `Frames processed: ${numFramesProcessed}`;
@@ -40,19 +52,24 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
     }
   };
 
+  const getVideoOptions = () => {
+    const largeFileModeOptions = ',scale=2000:-1:flags=lanczos';
+    return [
+      '-i',
+      'in.mov',
+      '-vf',
+      `fps=15${isLargeFileModeEnabled ? largeFileModeOptions : ''}`,
+      '-f',
+      'gif',
+      'out.gif',
+    ];
+  };
+
   const convertToGif = async () => {
     setIsConverting(true);
     ffmpeg.setLogger(handleLogs);
     ffmpeg.FS('writeFile', 'in.mov', await fetchFile(video));
-    await ffmpeg.run(
-      '-i',
-      'in.mov',
-      '-vf',
-      'fps=15,scale=2000:-1:flags=lanczos',
-      '-f',
-      'gif',
-      'out.gif'
-    );
+    await ffmpeg.run(...getVideoOptions());
     const data = ffmpeg.FS('readFile', 'out.gif');
     const url = URL.createObjectURL(new Blob([data.buffer], { type: 'image/gif' }));
     setGif(url);
@@ -60,8 +77,19 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
     setIsConverting(false);
   };
 
+  const handleLargeFileModeChange = () => {
+    setIsLargeFileModeEnabled(!isLargeFileModeEnabled);
+  };
+
   return (
     <Flex alignItems="center" direction="column">
+      <FormControl display="flex" alignItems="center">
+        <Switch id="large-file-mode-switch" onChange={handleLargeFileModeChange} size="md" />
+        <FormLabel htmlFor="large-file-mode-switch" m="0 6px 0">
+          Large file mode
+        </FormLabel>
+      </FormControl>
+
       {!isConverting && (
         <Box mt="14px">
           <FileInput id="input" type="file" onChange={handleFileChange} />
