@@ -44,7 +44,15 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
     setIsConverting(true);
     ffmpeg.setLogger(handleLogs);
     ffmpeg.FS('writeFile', 'in.mov', await fetchFile(video));
-    await ffmpeg.run('-i', 'in.mov', '-t', '2.5', '-ss', '2.0', '-f', 'gif', 'out.gif');
+    await ffmpeg.run(
+      '-i',
+      'in.mov',
+      '-vf',
+      'fps=15,scale=2000:-1:flags=lanczos',
+      '-f',
+      'gif',
+      'out.gif'
+    );
     const data = ffmpeg.FS('readFile', 'out.gif');
     const url = URL.createObjectURL(new Blob([data.buffer], { type: 'image/gif' }));
     setGif(url);
