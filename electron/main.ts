@@ -66,9 +66,12 @@ function createTray() {
   tray.setToolTip('TrayGif');
   tray.setIgnoreDoubleClickEvents(true);
 
-  // tray.on('right-click', () => {
-  //   tray.popUpContextMenu(contextMenu);
-  // });
+  tray.on('click', () => {
+    tray?.popUpContextMenu(contextMenu);
+  });
+  tray.on('right-click', () => {
+    tray?.popUpContextMenu(contextMenu);
+  });
 }
 
 app.on('ready', () => {
