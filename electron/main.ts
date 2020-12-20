@@ -77,6 +77,7 @@ function createTray() {
 app.on('ready', () => {
   createMainWindow();
   createTray();
+  app.dock.hide();
 });
 
 app.on('activate', () => {
