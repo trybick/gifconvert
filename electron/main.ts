@@ -1,14 +1,15 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, Menu, nativeImage, Tray } from 'electron';
 import * as path from 'path';
 import * as isDev from 'electron-is-dev';
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
 
 let mainWindow: BrowserWindow;
+let tray: Tray | null = null;
 let shouldQuit = false;
 const devToolsOnStartup = false;
 const port = 4002;
 
-function init() {
+function createMainWindow() {
   mainWindow = new BrowserWindow({
     width: 560,
     height: 560,
@@ -40,8 +41,39 @@ function init() {
   });
 }
 
+function createTray() {
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: 'Show TrayGif',
+      click: async () => {
+        mainWindow.show();
+      },
+    },
+    { type: 'separator' },
+    {
+      label: 'Quit TrayGif',
+      click: async () => {
+        app.quit();
+      },
+    },
+  ]);
+
+  const iconPath = path.join(__dirname, '/images/tray-icon.png');
+  const ogTrayIcon = nativeImage.createFromPath(iconPath);
+  const resizedTrayIcon = ogTrayIcon.resize({ width: 16, height: 16 });
+
+  tray = new Tray(resizedTrayIcon);
+  tray.setToolTip('TrayGif');
+  tray.setIgnoreDoubleClickEvents(true);
+
+  // tray.on('right-click', () => {
+  //   tray.popUpContextMenu(contextMenu);
+  // });
+}
+
 app.on('ready', () => {
-  init();
+  createMainWindow();
+  createTray();
 });
 
 app.on('activate', () => {
