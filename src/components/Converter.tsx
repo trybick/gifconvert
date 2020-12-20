@@ -70,15 +70,20 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
     ffmpeg.setLogger(handleLogs);
     ffmpeg.FS('writeFile', 'in.mov', await fetchFile(video));
     await ffmpeg.run(...getVideoOptions());
-    const data = ffmpeg.FS('readFile', 'out.gif');
-    const url = URL.createObjectURL(new Blob([data.buffer], { type: 'image/gif' }));
-    setGif(url);
+    const gifRaw = ffmpeg.FS('readFile', 'out.gif');
+    const gifUrl = URL.createObjectURL(new Blob([gifRaw.buffer], { type: 'image/gif' }));
+    setGif(gifUrl);
     setVideo('');
     setIsConverting(false);
   };
 
   const handleLargeFileModeChange = () => {
     setIsLargeFileModeEnabled(!isLargeFileModeEnabled);
+  };
+
+  const getTotalSizeForDisplay = () => {
+    const sizeInMB = (+totalSize / 1000).toFixed(2);
+    return `${sizeInMB} MB`;
   };
 
   return (
@@ -129,7 +134,7 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
           <Image src={gif} height="200px" />
           <Flex alignItems="center" direction="column" justifyContent="center" mt="12px">
             <Text fontSize="14px" fontWeight="500" mt="0px">
-              Size: {totalSize}
+              Size: {getTotalSizeForDisplay()}
             </Text>
             <Link
               href={gif}
