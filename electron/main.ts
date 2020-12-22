@@ -35,9 +35,13 @@ function createMainWindow() {
     .then((name) => console.log(`Added Extension:  ${name}`))
     .catch((err) => console.log('An error occurred: ', err));
 
-  mainWindow.on('close', (e: Event) => {
+  mainWindow.on('restore', () => {
+    app.dock.show();
+  });
+  mainWindow.on('close', (event: Event) => {
     mainWindow.hide();
-    !shouldQuit && e.preventDefault();
+    app.dock.hide();
+    !shouldQuit && event.preventDefault();
   });
 }
 
@@ -68,6 +72,7 @@ function createTray() {
 
   tray.on('click', () => {
     mainWindow.show();
+    app.dock.show();
   });
   tray.on('right-click', () => {
     tray?.popUpContextMenu(contextMenu);
@@ -77,7 +82,6 @@ function createTray() {
 app.on('ready', () => {
   createMainWindow();
   createTray();
-  app.dock.hide();
 });
 
 app.on('activate', () => {
