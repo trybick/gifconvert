@@ -6,7 +6,7 @@ import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-insta
 let mainWindow: BrowserWindow;
 let tray: Tray | null = null;
 let shouldQuit = false;
-const devToolsOnStartup = false;
+const shouldOpenDevTools = false;
 const port = 4002;
 
 function createMainWindow() {
@@ -14,7 +14,7 @@ function createMainWindow() {
     width: 560,
     height: 560,
     webPreferences: {
-      contextIsolation: true,
+      contextIsolation: false,
       nodeIntegration: true,
     },
   });
@@ -26,7 +26,7 @@ function createMainWindow() {
       forceHardReset: true,
       hardResetMethod: 'exit',
     });
-    devToolsOnStartup && mainWindow.webContents.openDevTools();
+    shouldOpenDevTools && mainWindow.webContents.openDevTools();
   } else {
     mainWindow.loadURL(`file://${__dirname}/../index.html`);
   }
@@ -67,7 +67,7 @@ function createTray() {
   tray.setIgnoreDoubleClickEvents(true);
 
   tray.on('click', () => {
-    tray?.popUpContextMenu(contextMenu);
+    mainWindow.show();
   });
   tray.on('right-click', () => {
     tray?.popUpContextMenu(contextMenu);
