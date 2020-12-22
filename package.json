@@ -8,7 +8,7 @@
     "start": "cross-env PORT=4002 react-scripts start",
     "build": "react-scripts build",
     "postinstall": "electron-builder install-app-deps",
-    "bundle-images": "cp -r ./electron/images ./build/electron/images",
+    "bundle-images": "mkdir -p ./build/electron/images && cp -r ./electron/images ./build/electron/",
     "electron:dev": "yarn bundle-images && concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:4002 && tsc -p electron -w\" \"wait-on http://localhost:4002 && tsc -p electron && electron .\"",
     "electron:build": "yarn build && tsc -p electron && electron-builder",
     "electron:pack": "yarn build && tsc -p electron && electron-builder --dir"
