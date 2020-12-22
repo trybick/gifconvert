@@ -90,7 +90,7 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
     <Flex alignItems="center" direction="column">
       {!isConverting && (
         <FormControl alignItems="center" display="flex" justifyContent="flex-end" mb="25px">
-          <FormLabel fontSize="15px" htmlFor="large-file-mode-switch" m="0 6px 0">
+          <FormLabel cursor="pointer" fontSize="15px" htmlFor="large-file-mode-switch" m="0 6px 0">
             Large file mode
           </FormLabel>
           <Switch id="large-file-mode-switch" onChange={handleLargeFileModeChange} size="md" />
