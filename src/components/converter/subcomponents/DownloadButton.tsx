@@ -14,14 +14,14 @@ export default function DownloadButton({
   };
 
   return gif ? (
-    <Box mt="55px">
+    <Box mt="40px">
       <Image borderRadius="4px" height="200px" src={gif} />
       <Flex alignItems="center" direction="column" justifyContent="center" mt="12px">
         <Text fontSize="14px" fontWeight="500" mt="0px">
           Size: {getconvertedSizeForDisplay()}
         </Text>
         <Link href={gif} mt="12px" textDecor="none" _hover={{ textDecoration: 'none' }} download>
-          <Button colorScheme="teal" leftIcon={<DownloadIcon />} size="lg">
+          <Button colorScheme="teal" height="4rem" leftIcon={<DownloadIcon />} size="lg">
             Download GIF
           </Button>
         </Link>
