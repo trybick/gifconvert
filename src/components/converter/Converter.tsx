@@ -45,12 +45,13 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
   };
 
   const getVideoOptions = () => {
-    const largeFileModeOptions = ',scale=2000:-1:flags=lanczos';
+    const normalOptions = 'fps=15';
+    const largeFileModeOptions = 'fps=12,scale=1000:-1:flags=lanczos';
     return [
       '-i',
       'in.mov',
       '-vf',
-      `fps=15${isLargeFileModeEnabled ? largeFileModeOptions : ''}`,
+      `${isLargeFileModeEnabled ? largeFileModeOptions : normalOptions}`,
       '-f',
       'gif',
       'out.gif',
