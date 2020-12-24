@@ -1,2 +1,2 @@
 export const framesRegex = /(?<=frame=)(.*)(?=fps)/;
-export const totalSizeRegex = /(?<=video:)(.*)(?=kB audio)/;
+export const convertedSizeRegex = /(?<=video:)(.*)(?=kB audio)/;

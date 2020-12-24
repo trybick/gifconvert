@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { fetchFile, FFmpeg } from '@ffmpeg/ffmpeg';
 import { Flex } from '@chakra-ui/react';
-import { framesRegex, totalSizeRegex } from '../../utils/regex';
+import { framesRegex, convertedSizeRegex } from '../../utils/regex';
 import {
   DownloadButton,
   LargeFileModeSwitch,
@@ -14,7 +14,7 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
   const [gif, setGif] = useState('');
   const [isConverting, setIsConverting] = useState(false);
   const [numFramesProcessed, setNumFramesProcessed] = useState(0);
-  const [totalSize, setTotalSize] = useState('');
+  const [convertedSize, setConvertedSize] = useState('');
   const [isLargeFileModeEnabled, setIsLargeFileModeEnabled] = useState(false);
 
   useEffect(() => {
@@ -27,18 +27,20 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
     file && setVideo(file);
   };
 
+  const handleLargeFileModeChange = () => {
+    setIsLargeFileModeEnabled(!isLargeFileModeEnabled);
+  };
+
   const handleLogs = ({ message }: { message: string }) => {
-    // Frames
-    const framesData = message.match(framesRegex);
-    const numFrames = framesData && +framesData[0].trim();
+    const framesMatch = message.match(framesRegex);
+    const numFrames = framesMatch && +framesMatch[0].trim();
     if (numFrames !== null) {
       setNumFramesProcessed(numFrames);
     }
-    // Size
-    const totalSizeData = message.match(totalSizeRegex);
-    const totalSize = totalSizeData && totalSizeData[0].trim();
-    if (totalSize !== null) {
-      totalSize && setTotalSize(totalSize);
+    const convertedSizeMatch = message.match(convertedSizeRegex);
+    const convertedSize = convertedSizeMatch && convertedSizeMatch[0].trim();
+    if (convertedSize !== null) {
+      convertedSize && setConvertedSize(convertedSize);
     }
   };
 
@@ -67,10 +69,6 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
     setIsConverting(false);
   };
 
-  const handleLargeFileModeChange = () => {
-    setIsLargeFileModeEnabled(!isLargeFileModeEnabled);
-  };
-
   return (
     <Flex alignItems="center" direction="column">
       <LargeFileModeSwitch
@@ -80,7 +78,7 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
       />
       <SelectFileButton handleFileChange={handleFileChange} isConverting={isConverting} />
       <VideoSpinner isConverting={isConverting} numFramesProcessed={numFramesProcessed} />
-      <DownloadButton gif={gif} totalSize={totalSize} />
+      <DownloadButton gif={gif} convertedSize={convertedSize} />
     </Flex>
   );
 }
