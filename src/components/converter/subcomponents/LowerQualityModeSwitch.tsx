@@ -1,11 +1,11 @@
 import { FormControl, FormLabel, Switch, Tooltip } from '@chakra-ui/react';
 
-export default function LargeFileModeSwitch({
-  handleLargeFileModeChange,
+export default function LowerQualityModeSwitch({
+  handleLowerQualityModeChange,
   isChecked,
   isConverting,
 }: {
-  handleLargeFileModeChange: () => void;
+  handleLowerQualityModeChange: () => void;
   isChecked: boolean;
   isConverting: boolean;
 }) {
@@ -20,15 +20,15 @@ export default function LargeFileModeSwitch({
         variant="outline"
         hasArrow
       >
-        <FormLabel cursor="pointer" fontSize="15px" htmlFor="large-file-mode-switch" m="0 6px 0">
-          Large file mode
+        <FormLabel cursor="pointer" fontSize="15px" htmlFor="quality-switch" m="0 6px 0">
+          Lower quality
         </FormLabel>
       </Tooltip>
       <Switch
         colorScheme="green"
-        id="large-file-mode-switch"
+        id="quality-switch"
         isChecked={isChecked}
-        onChange={handleLargeFileModeChange}
+        onChange={handleLowerQualityModeChange}
         size="md"
       />
     </FormControl>

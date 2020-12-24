@@ -4,7 +4,7 @@ import { Flex } from '@chakra-ui/react';
 import { framesRegex, convertedSizeRegex } from '../../utils/regex';
 import {
   DownloadButton,
-  LargeFileModeSwitch,
+  LowerQualityModeSwitch,
   SelectFileButton,
   VideoSpinner,
 } from './subcomponents';
@@ -15,7 +15,7 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
   const [isConverting, setIsConverting] = useState(false);
   const [numFramesProcessed, setNumFramesProcessed] = useState(0);
   const [convertedSize, setConvertedSize] = useState('');
-  const [isLargeFileModeEnabled, setIsLargeFileModeEnabled] = useState(false);
+  const [isLowerQualityModeEnabled, setIsLowerQualityModeEnabled] = useState(false);
 
   useEffect(() => {
     video && convertToGif();
@@ -27,8 +27,8 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
     file && setVideo(file);
   };
 
-  const handleLargeFileModeChange = () => {
-    setIsLargeFileModeEnabled(!isLargeFileModeEnabled);
+  const handleLowerQualityModeChange = () => {
+    setIsLowerQualityModeEnabled(!isLowerQualityModeEnabled);
   };
 
   const handleLogs = ({ message }: { message: string }) => {
@@ -46,12 +46,12 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
 
   const getVideoOptions = () => {
     const normalOptions = 'fps=15';
-    const largeFileModeOptions = 'fps=12,scale=1000:-1:flags=lanczos';
+    const lowerQualityOptions = 'fps=12,scale=1000:-1:flags=lanczos';
     return [
       '-i',
       'in.mov',
       '-vf',
-      `${isLargeFileModeEnabled ? largeFileModeOptions : normalOptions}`,
+      `${isLowerQualityModeEnabled ? lowerQualityOptions : normalOptions}`,
       '-f',
       'gif',
       'out.gif',
@@ -72,9 +72,9 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
 
   return (
     <Flex alignItems="center" direction="column">
-      <LargeFileModeSwitch
-        handleLargeFileModeChange={handleLargeFileModeChange}
-        isChecked={isLargeFileModeEnabled}
+      <LowerQualityModeSwitch
+        handleLowerQualityModeChange={handleLowerQualityModeChange}
+        isChecked={isLowerQualityModeEnabled}
         isConverting={isConverting}
       />
       <SelectFileButton handleFileChange={handleFileChange} isConverting={isConverting} />
