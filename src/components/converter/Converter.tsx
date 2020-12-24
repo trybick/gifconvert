@@ -71,11 +71,6 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
     setIsLargeFileModeEnabled(!isLargeFileModeEnabled);
   };
 
-  const getTotalSizeForDisplay = () => {
-    const sizeInMB = (+totalSize / 1000).toFixed(2);
-    return `${sizeInMB} MB`;
-  };
-
   return (
     <Flex alignItems="center" direction="column">
       <LargeFileModeSwitch
@@ -85,7 +80,7 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
       />
       <SelectFileButton handleFileChange={handleFileChange} isConverting={isConverting} />
       <VideoSpinner isConverting={isConverting} numFramesProcessed={numFramesProcessed} />
-      <DownloadButton getTotalSizeForDisplay={getTotalSizeForDisplay} gif={gif} />
+      <DownloadButton gif={gif} totalSize={totalSize} />
     </Flex>
   );
 }

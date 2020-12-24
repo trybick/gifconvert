@@ -1,13 +1,12 @@
 import { Box, Button, Flex, Image, Link, Text } from '@chakra-ui/react';
 import { DownloadIcon } from '@chakra-ui/icons';
 
-export default function DownloadButton({
-  getTotalSizeForDisplay,
-  gif,
-}: {
-  getTotalSizeForDisplay: () => string;
-  gif: string;
-}) {
+export default function DownloadButton({ totalSize, gif }: { totalSize: string; gif: string }) {
+  const getTotalSizeForDisplay = () => {
+    const sizeInMB = (+totalSize / 1000).toFixed(2);
+    return `${sizeInMB} MB`;
+  };
+
   return gif ? (
     <Box mt="55px">
       <Image borderRadius="4px" height="200px" src={gif} />
