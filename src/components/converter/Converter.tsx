@@ -46,7 +46,7 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
 
   const getVideoOptions = () => {
     const normalOptions = 'fps=15';
-    const lowerQualityOptions = 'fps=12,scale=1000:-1:flags=lanczos';
+    const lowerQualityOptions = 'fps=12,scale=800:-1:flags=lanczos';
     return [
       '-i',
       'in.mov',

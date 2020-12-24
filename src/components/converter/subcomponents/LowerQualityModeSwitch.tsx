@@ -13,8 +13,8 @@ export default function LowerQualityModeSwitch({
     <FormControl alignItems="center" display="flex" justifyContent="flex-end" mb="25px">
       <Tooltip
         bg="#2C7A7B"
-        label="Useful to reduce file size"
-        maxW="130px"
+        label="Enable to reduce file size for longer clips"
+        maxW="160px"
         openDelay={300}
         textAlign="center"
         variant="outline"
