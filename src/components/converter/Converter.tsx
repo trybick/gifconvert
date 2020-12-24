@@ -80,6 +80,7 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
     <Flex alignItems="center" direction="column">
       <LargeFileModeSwitch
         handleLargeFileModeChange={handleLargeFileModeChange}
+        isChecked={isLargeFileModeEnabled}
         isConverting={isConverting}
       />
       <SelectFileButton handleFileChange={handleFileChange} isConverting={isConverting} />

@@ -2,9 +2,11 @@ import { FormControl, FormLabel, Switch, Tooltip } from '@chakra-ui/react';
 
 export default function LargeFileModeSwitch({
   handleLargeFileModeChange,
+  isChecked,
   isConverting,
 }: {
   handleLargeFileModeChange: () => void;
+  isChecked: boolean;
   isConverting: boolean;
 }) {
   return isConverting ? null : (
@@ -25,6 +27,7 @@ export default function LargeFileModeSwitch({
       <Switch
         colorScheme="green"
         id="large-file-mode-switch"
+        isChecked={isChecked}
         onChange={handleLargeFileModeChange}
         size="md"
       />
