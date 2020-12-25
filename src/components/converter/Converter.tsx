@@ -2,12 +2,8 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { fetchFile, FFmpeg } from '@ffmpeg/ffmpeg';
 import { Flex } from '@chakra-ui/react';
 import { framesRegex, convertedSizeRegex } from '../../utils/regex';
-import {
-  DownloadButton,
-  LowerQualityModeSwitch,
-  SelectFileButton,
-  VideoSpinner,
-} from './subcomponents';
+import { DownloadButton, SelectFileButton, VideoSpinner } from './subcomponents';
+import Header from '../header/Header';
 
 export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
   const [video, setVideo] = useState<string | File>('');
@@ -72,10 +68,10 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
 
   return (
     <Flex alignItems="center" direction="column">
-      <LowerQualityModeSwitch
+      <Header
         handleLowerQualityModeChange={handleLowerQualityModeChange}
-        isChecked={isLowerQualityModeEnabled}
         isConverting={isConverting}
+        isLowerQualityModeEnabled={isLowerQualityModeEnabled}
       />
       <SelectFileButton handleFileChange={handleFileChange} isConverting={isConverting} />
       <VideoSpinner isConverting={isConverting} numFramesProcessed={numFramesProcessed} />
