@@ -20,7 +20,7 @@ export default function FileDropzone({
     <DropzoneContainer {...getRootProps({ isDragActive, isDragAccept, isDragReject })}>
       {isDragActive && (
         <DropMessage>
-          <Text fontSize="35px">Drop to upload</Text>
+          <Text fontSize="30px">Drop to upload</Text>
         </DropMessage>
       )}
     </DropzoneContainer>
@@ -33,22 +33,15 @@ const DropzoneContainer = styled.div<any>`
   min-width: 523px;
   top: 20px;
   left: 20px;
-  z-index: -10;
+  z-index: ${({ isDragActive }) => (isDragActive ? '10' : '-10')};
   border-width: 2px;
   border-radius: 2px;
   border-color: ${(props) => getBorderColor(props)};
   border-style: dashed;
-  background-color: #ffffff;
+  background-color: ${({ isDragActive }) => (isDragActive ? '#fafafa' : '#ffffff')};
   color: #bdbdbd;
   outline: none;
   transition: border 0.24s ease-in-out;
-
-  ${({ isDragActive }) =>
-    isDragActive &&
-    `
-    z-index: 10;
-    background-color: #fafafa;
-`}
 `;
 
 const DropMessage = styled.div`
