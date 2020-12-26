@@ -21,7 +21,13 @@ export default function LowerQualityModeSwitch({
           variant="outline"
           hasArrow
         >
-          <FormLabel cursor="pointer" fontSize="15px" htmlFor="quality-switch" m="0 6px 0">
+          <FormLabel
+            color="#757575"
+            cursor="pointer"
+            fontSize="15px"
+            htmlFor="quality-switch"
+            m="0 6px 0"
+          >
             Lower quality
           </FormLabel>
         </Tooltip>

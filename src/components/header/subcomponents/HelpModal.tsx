@@ -17,7 +17,7 @@ export default function SelectFileButton({ isConverting }: { isConverting: boole
   return isConverting ? null : (
     <Box>
       <Box as="button" outline="none">
-        <InfoOutlineIcon boxSize="20px" color="grey" onClick={onOpen} />
+        <InfoOutlineIcon boxSize="20px" color="#757575" onClick={onOpen} />
       </Box>
 
       <Modal isOpen={isOpen} onClose={onClose}>
