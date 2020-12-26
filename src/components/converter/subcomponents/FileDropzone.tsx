@@ -3,16 +3,16 @@ import styled from '@emotion/styled';
 
 export default function FileDropzone({
   isConverting,
-  onDrop,
+  handleDropFileChange,
 }: {
   isConverting: boolean;
-  onDrop: (acceptedFiles: File[]) => void;
+  handleDropFileChange: (acceptedFiles: File[]) => void;
 }) {
   const { getRootProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
     accept: 'video/*',
     maxFiles: 1,
     multiple: false,
-    onDrop,
+    onDrop: handleDropFileChange,
   });
 
   return isConverting ? null : (

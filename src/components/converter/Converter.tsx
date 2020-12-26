@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { fetchFile, FFmpeg } from '@ffmpeg/ffmpeg';
 import { Flex } from '@chakra-ui/react';
 import { framesRegex, convertedSizeRegex } from '../../utils/regex';
-import { DownloadButton, FileDropzone, VideoSpinner } from './subcomponents';
+import { DownloadButton, FileDropzone, SelectFileButton, VideoSpinner } from './subcomponents';
 import Header from '../header/Header';
 
 export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
@@ -17,13 +17,19 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
     video && convertToGif();
   }, [video]);
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
+  const handleDropFileChange = useCallback((acceptedFiles: File[]) => {
     const file = acceptedFiles[0];
     if (file && file.type === 'video/quicktime') {
       setGif('');
       setVideo(file);
     }
   }, []);
+
+  const handleSelectFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setGif('');
+    const file = event.target.files?.item(0);
+    file && setVideo(file);
+  };
 
   const handleLowerQualityModeChange = () => {
     setIsLowerQualityModeEnabled(!isLowerQualityModeEnabled);
@@ -75,7 +81,11 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
         isConverting={isConverting}
         isLowerQualityModeEnabled={isLowerQualityModeEnabled}
       />
-      <FileDropzone isConverting={isConverting} onDrop={onDrop} />
+      <FileDropzone isConverting={isConverting} handleDropFileChange={handleDropFileChange} />
+      <SelectFileButton
+        isConverting={isConverting}
+        handleSelectFileChange={handleSelectFileChange}
+      />
       <VideoSpinner isConverting={isConverting} numFramesProcessed={numFramesProcessed} />
       <DownloadButton gif={gif} convertedSize={convertedSize} />
     </Flex>
