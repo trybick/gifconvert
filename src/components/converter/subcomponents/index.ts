@@ -1,6 +1,6 @@
 import DownloadButton from './DownloadButton';
-import LargeFileModeSwitch from './LargeFileModeSwitch';
+import FileDropzone from './FileDropzone';
 import SelectFileButton from './SelectFileButton';
 import VideoSpinner from './VideoSpinner';
 
-export { DownloadButton, LargeFileModeSwitch, SelectFileButton, VideoSpinner };
+export { DownloadButton, FileDropzone, SelectFileButton, VideoSpinner };

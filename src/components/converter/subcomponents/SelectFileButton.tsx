@@ -4,15 +4,15 @@ import { PlusSquareIcon } from '@chakra-ui/icons';
 import styled from '@emotion/styled';
 
 export default function SelectFileButton({
-  handleFileChange,
+  handleSelectFileChange,
   isConverting,
 }: {
-  handleFileChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleSelectFileChange: (e: ChangeEvent<HTMLInputElement>) => void;
   isConverting: boolean;
 }) {
   return isConverting ? null : (
     <Box mt="14px">
-      <FileInput id="input" type="file" onChange={handleFileChange} />
+      <FileInput id="input" type="file" onChange={handleSelectFileChange} />
       <Button
         as="label"
         colorScheme="teal"

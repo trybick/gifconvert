@@ -12,7 +12,7 @@ export default function VideoSpinner({
     : `Frames processed: ${numFramesProcessed}`;
 
   return isConverting ? (
-    <Flex alignItems="center" direction="column" mt="70px">
+    <Flex alignItems="center" direction="column" mt="160px">
       <Spinner color="teal.500" label="converting" size="lg" textAlign="center" thickness="3px" />
       <Text fontSize="18px" mt="26px">
         {numFramesForDisplay}

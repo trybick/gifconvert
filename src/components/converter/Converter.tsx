@@ -1,13 +1,9 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { fetchFile, FFmpeg } from '@ffmpeg/ffmpeg';
 import { Flex } from '@chakra-ui/react';
 import { framesRegex, convertedSizeRegex } from '../../utils/regex';
-import {
-  DownloadButton,
-  LargeFileModeSwitch,
-  SelectFileButton,
-  VideoSpinner,
-} from './subcomponents';
+import { DownloadButton, FileDropzone, SelectFileButton, VideoSpinner } from './subcomponents';
+import Header from '../header/Header';
 
 export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
   const [video, setVideo] = useState<string | File>('');
@@ -15,20 +11,28 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
   const [isConverting, setIsConverting] = useState(false);
   const [numFramesProcessed, setNumFramesProcessed] = useState(0);
   const [convertedSize, setConvertedSize] = useState('');
-  const [isLargeFileModeEnabled, setIsLargeFileModeEnabled] = useState(false);
+  const [isLowerQualityModeEnabled, setIsLowerQualityModeEnabled] = useState(false);
 
   useEffect(() => {
     video && convertToGif();
   }, [video]);
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleDropFileChange = useCallback((acceptedFiles: File[]) => {
+    const file = acceptedFiles[0];
+    if (file && file.type === 'video/quicktime') {
+      setGif('');
+      setVideo(file);
+    }
+  }, []);
+
+  const handleSelectFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     setGif('');
     const file = event.target.files?.item(0);
     file && setVideo(file);
   };
 
-  const handleLargeFileModeChange = () => {
-    setIsLargeFileModeEnabled(!isLargeFileModeEnabled);
+  const handleLowerQualityModeChange = () => {
+    setIsLowerQualityModeEnabled(!isLowerQualityModeEnabled);
   };
 
   const handleLogs = ({ message }: { message: string }) => {
@@ -45,12 +49,13 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
   };
 
   const getVideoOptions = () => {
-    const largeFileModeOptions = ',scale=2000:-1:flags=lanczos';
+    const normalOptions = 'fps=15';
+    const lowerQualityOptions = 'fps=12,scale=800:-1:flags=lanczos';
     return [
       '-i',
       'in.mov',
       '-vf',
-      `fps=15${isLargeFileModeEnabled ? largeFileModeOptions : ''}`,
+      `${isLowerQualityModeEnabled ? lowerQualityOptions : normalOptions}`,
       '-f',
       'gif',
       'out.gif',
@@ -71,12 +76,16 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
 
   return (
     <Flex alignItems="center" direction="column">
-      <LargeFileModeSwitch
-        handleLargeFileModeChange={handleLargeFileModeChange}
-        isChecked={isLargeFileModeEnabled}
+      <Header
+        handleLowerQualityModeChange={handleLowerQualityModeChange}
         isConverting={isConverting}
+        isLowerQualityModeEnabled={isLowerQualityModeEnabled}
       />
-      <SelectFileButton handleFileChange={handleFileChange} isConverting={isConverting} />
+      <FileDropzone isConverting={isConverting} handleDropFileChange={handleDropFileChange} />
+      <SelectFileButton
+        isConverting={isConverting}
+        handleSelectFileChange={handleSelectFileChange}
+      />
       <VideoSpinner isConverting={isConverting} numFramesProcessed={numFramesProcessed} />
       <DownloadButton gif={gif} convertedSize={convertedSize} />
     </Flex>

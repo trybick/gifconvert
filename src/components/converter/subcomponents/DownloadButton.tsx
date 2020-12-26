@@ -1,4 +1,4 @@
-import { Box, Button, Flex, Image, Link, Text } from '@chakra-ui/react';
+import { Box, Button, Divider, Flex, Image, Link, Text } from '@chakra-ui/react';
 import { DownloadIcon } from '@chakra-ui/icons';
 
 export default function DownloadButton({
@@ -14,18 +14,21 @@ export default function DownloadButton({
   };
 
   return gif ? (
-    <Box mt="55px">
-      <Image borderRadius="4px" height="200px" src={gif} />
-      <Flex alignItems="center" direction="column" justifyContent="center" mt="12px">
-        <Text fontSize="14px" fontWeight="500" mt="0px">
-          Size: {getconvertedSizeForDisplay()}
-        </Text>
-        <Link href={gif} mt="12px" textDecor="none" _hover={{ textDecoration: 'none' }} download>
-          <Button colorScheme="teal" leftIcon={<DownloadIcon />} size="lg">
-            Download GIF
-          </Button>
-        </Link>
-      </Flex>
-    </Box>
+    <>
+      <Divider borderWidth="1px" maxW="310px" mt="20px" opactiy="1" />
+      <Box mt="20px">
+        <Image borderRadius="4px" height="200px" src={gif} />
+        <Flex alignItems="center" direction="column" justifyContent="center" mt="12px">
+          <Text fontSize="14px" fontWeight="500" mt="0px">
+            Size: {getconvertedSizeForDisplay()}
+          </Text>
+          <Link href={gif} mt="12px" textDecor="none" _hover={{ textDecoration: 'none' }} download>
+            <Button colorScheme="teal" height="4rem" leftIcon={<DownloadIcon />} size="lg">
+              Download GIF
+            </Button>
+          </Link>
+        </Flex>
+      </Box>
+    </>
   ) : null;
 }
