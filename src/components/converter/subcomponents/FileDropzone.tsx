@@ -1,4 +1,5 @@
 import { useDropzone } from 'react-dropzone';
+import { Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
 export default function FileDropzone({
@@ -16,30 +17,20 @@ export default function FileDropzone({
   });
 
   return isConverting ? null : (
-    <DropzoneContainer
-      {...getRootProps({ isDragActive, isDragAccept, isDragReject })}
-      {...(isDragActive ? 'Drag and drop here' : '')}
-    ></DropzoneContainer>
+    <DropzoneContainer {...getRootProps({ isDragActive, isDragAccept, isDragReject })}>
+      {isDragActive && (
+        <DropMessage>
+          <Text fontSize="35px">Drop to upload</Text>
+        </DropMessage>
+      )}
+    </DropzoneContainer>
   );
 }
 
-const getBorderColor = ({ isDragAccept, isDragReject, isDragActive }: any) => {
-  if (isDragAccept) {
-    return '#00e676';
-  }
-  if (isDragReject) {
-    return '#ff1744';
-  }
-  if (isDragActive) {
-    return '#2196f3';
-  }
-  return '#ffffff';
-};
-
 const DropzoneContainer = styled.div<any>`
   position: absolute;
-  min-height: 630px;
-  min-width: 622px;
+  min-height: 495px;
+  min-width: 523px;
   top: 20px;
   left: 20px;
   z-index: -10;
@@ -59,3 +50,22 @@ const DropzoneContainer = styled.div<any>`
     background-color: #fafafa;
 `}
 `;
+
+const DropMessage = styled.div`
+  position: absolute;
+  left: 150px;
+  top: 200px;
+`;
+
+const getBorderColor = ({ isDragAccept, isDragReject, isDragActive }: any) => {
+  if (isDragAccept) {
+    return '#00e676';
+  }
+  if (isDragReject) {
+    return '#ff1744';
+  }
+  if (isDragActive) {
+    return '#2196f3';
+  }
+  return '#ffffff';
+};
