@@ -1,5 +1,7 @@
+import { useRecoilState } from 'recoil';
 import { Box, Button, Divider, Flex, Image, Link, Text } from '@chakra-ui/react';
 import { DownloadIcon } from '@chakra-ui/icons';
+import { isDropActiveState } from '../../../recoil/atoms';
 
 export default function DownloadButton({
   convertedSize,
@@ -8,13 +10,15 @@ export default function DownloadButton({
   convertedSize: string;
   gif: string;
 }) {
+  const [isDropActive] = useRecoilState(isDropActiveState);
+
   const getconvertedSizeForDisplay = () => {
     const sizeInMB = (+convertedSize / 1000).toFixed(2);
     return `${sizeInMB} MB`;
   };
 
   return gif ? (
-    <>
+    <Box zIndex={isDropActive ? '0' : '11'}>
       <Divider borderWidth="1px" maxW="310px" mt="20px" opactiy="1" />
       <Box mt="20px">
         <Image borderRadius="4px" height="200px" src={gif} />
@@ -29,6 +33,6 @@ export default function DownloadButton({
           </Link>
         </Flex>
       </Box>
-    </>
+    </Box>
   ) : null;
 }

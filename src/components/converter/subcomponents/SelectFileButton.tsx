@@ -1,7 +1,9 @@
 import { ChangeEvent } from 'react';
+import { useRecoilState } from 'recoil';
 import { Box, Button } from '@chakra-ui/react';
 import { PlusSquareIcon } from '@chakra-ui/icons';
 import styled from '@emotion/styled';
+import { isDropActiveState } from '../../../recoil/atoms';
 
 export default function SelectFileButton({
   handleSelectFileChange,
@@ -10,8 +12,10 @@ export default function SelectFileButton({
   handleSelectFileChange: (e: ChangeEvent<HTMLInputElement>) => void;
   isConverting: boolean;
 }) {
+  const [isDropActive] = useRecoilState(isDropActiveState);
+
   return isConverting ? null : (
-    <Box mt="14px">
+    <Box mt="14px" zIndex={isDropActive ? '0' : '11'}>
       <FileInput id="input" type="file" onChange={handleSelectFileChange} />
       <Button
         as="label"

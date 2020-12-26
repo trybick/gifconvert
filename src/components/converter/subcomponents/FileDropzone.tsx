@@ -1,6 +1,9 @@
+import { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
 import { DropzoneState, useDropzone } from 'react-dropzone';
 import { Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
+import { isDropActiveState } from '../../../recoil/atoms';
 
 export default function FileDropzone({
   isConverting,
@@ -9,12 +12,23 @@ export default function FileDropzone({
   isConverting: boolean;
   handleDropFileChange: (acceptedFiles: File[]) => void;
 }) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [isDropActive, setIsDropActive] = useRecoilState(isDropActiveState);
   const { getRootProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
     accept: 'video/*',
     maxFiles: 1,
     multiple: false,
     onDrop: handleDropFileChange,
   });
+
+  // While dropzone detects a drag, tell the rest of the app so it can update z-index values
+  useEffect(() => {
+    if (isDragActive) {
+      setIsDropActive(true);
+    } else {
+      setIsDropActive(false);
+    }
+  }, [isDragActive]);
 
   return isConverting ? null : (
     <DropzoneContainer {...getRootProps({ isDragActive, isDragAccept, isDragReject })}>
