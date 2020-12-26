@@ -1,9 +1,9 @@
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { fetchFile, FFmpeg } from '@ffmpeg/ffmpeg';
 import { Flex } from '@chakra-ui/react';
-import { framesRegex, convertedSizeRegex } from '../../utils/regex';
+import { framesRegex, convertedSizeRegex } from 'utils/regex';
 import { DownloadButton, FileDropzone, SelectFileButton, VideoSpinner } from './subcomponents';
-import Header from '../header/Header';
+import Header from 'components/header/Header';
 
 export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
   const [video, setVideo] = useState<string | File>('');

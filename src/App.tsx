@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { createFFmpeg } from '@ffmpeg/ffmpeg';
 import { Box } from '@chakra-ui/react';
-import Converter from './components/converter/Converter';
-import AppSpinner from './components/core/AppSpinner';
+import Converter from 'components/converter/Converter';
+import AppSpinner from 'components/core/AppSpinner';
 
 const ffmpeg = createFFmpeg({ log: true });
 

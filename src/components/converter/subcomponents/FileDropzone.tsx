@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil';
 import { DropzoneState, useDropzone } from 'react-dropzone';
 import { Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
-import { isDropActiveState } from '../../../recoil/atoms';
+import { isDropActiveState } from 'recoil/atoms';
 
 export default function FileDropzone({
   isConverting,

@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil';
 import { Box, Button } from '@chakra-ui/react';
 import { PlusSquareIcon } from '@chakra-ui/icons';
 import styled from '@emotion/styled';
-import { isDropActiveState } from '../../../recoil/atoms';
+import { isDropActiveState } from 'recoil/atoms';
 
 export default function SelectFileButton({
   handleSelectFileChange,

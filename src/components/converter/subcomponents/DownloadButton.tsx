@@ -1,7 +1,7 @@
 import { useRecoilState } from 'recoil';
 import { Box, Button, Divider, Flex, Image, Link, Text } from '@chakra-ui/react';
 import { DownloadIcon } from '@chakra-ui/icons';
-import { isDropActiveState } from '../../../recoil/atoms';
+import { isDropActiveState } from 'recoil/atoms';
 
 export default function DownloadButton({
   convertedSize,

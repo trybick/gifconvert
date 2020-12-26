@@ -1,8 +1,8 @@
 import { useRecoilState } from 'recoil';
 import { Grid } from '@chakra-ui/react';
+import { isDropActiveState } from 'recoil/atoms';
 import HelpModal from './subcomponents/HelpModal';
 import LowerQualityModeSwitch from './subcomponents/LowerQualityModeSwitch';
-import { isDropActiveState } from '../../recoil/atoms';
 
 export default function Header({
   handleLowerQualityModeChange,
