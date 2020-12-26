@@ -1,5 +1,5 @@
 import DownloadButton from './DownloadButton';
-import SelectFileButton from './SelectFileButton';
+import FileDropzone from './FileDropzone';
 import VideoSpinner from './VideoSpinner';
 
-export { DownloadButton, SelectFileButton, VideoSpinner };
+export { DownloadButton, FileDropzone, VideoSpinner };

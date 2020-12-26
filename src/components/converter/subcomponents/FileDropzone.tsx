@@ -1,14 +1,14 @@
 import { useDropzone } from 'react-dropzone';
 import styled from '@emotion/styled';
 
-export default function SelectFileButton({
+export default function FileDropzone({
   isConverting,
   onDrop,
 }: {
   isConverting: boolean;
   onDrop: (acceptedFiles: File[]) => void;
 }) {
-  const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
+  const { getRootProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
     accept: 'video/*',
     maxFiles: 1,
     multiple: false,
@@ -16,10 +16,10 @@ export default function SelectFileButton({
   });
 
   return isConverting ? null : (
-    <DropzoneContainer {...getRootProps({ isDragActive, isDragAccept, isDragReject })}>
-      <input {...getInputProps()} />
-      <p>Drag 'n' drop some files here, or click to select file</p>
-    </DropzoneContainer>
+    <DropzoneContainer
+      {...getRootProps({ isDragActive, isDragAccept, isDragReject })}
+      {...(isDragActive ? 'Drag and drop here' : '')}
+    ></DropzoneContainer>
   );
 }
 
@@ -33,23 +33,29 @@ const getBorderColor = ({ isDragAccept, isDragReject, isDragActive }: any) => {
   if (isDragActive) {
     return '#2196f3';
   }
-  return '#eeeeee';
+  return '#ffffff';
 };
 
-const DropzoneContainer = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
+const DropzoneContainer = styled.div<any>`
+  position: absolute;
+  min-height: 630px;
+  min-width: 622px;
+  top: 20px;
+  left: 20px;
+  z-index: -10;
   border-width: 2px;
   border-radius: 2px;
   border-color: ${(props) => getBorderColor(props)};
   border-style: dashed;
-  background-color: #fafafa;
+  background-color: #ffffff;
   color: #bdbdbd;
   outline: none;
   transition: border 0.24s ease-in-out;
-  cursor: pointer;
-  margin-top: 14px;
+
+  ${({ isDragActive }) =>
+    isDragActive &&
+    `
+    z-index: 10;
+    background-color: #fafafa;
+`}
 `;
