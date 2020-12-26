@@ -18,8 +18,11 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
   }, [video]);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    setGif('');
-    setVideo(acceptedFiles[0]);
+    const file = acceptedFiles[0];
+    if (file && file.type === 'video/quicktime') {
+      setGif('');
+      setVideo(file);
+    }
   }, []);
 
   const handleLowerQualityModeChange = () => {
