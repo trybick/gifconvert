@@ -1,36 +1,23 @@
-import { ChangeEvent } from 'react';
-import { Box, Button } from '@chakra-ui/react';
-import { PlusSquareIcon } from '@chakra-ui/icons';
-import styled from '@emotion/styled';
+import { Box } from '@chakra-ui/react';
+import { useDropzone } from 'react-dropzone';
 
 export default function SelectFileButton({
-  handleFileChange,
   isConverting,
+  onDrop,
 }: {
-  handleFileChange: (e: ChangeEvent<HTMLInputElement>) => void;
   isConverting: boolean;
+  onDrop: any;
 }) {
+  const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
+    onDrop,
+  });
+
   return isConverting ? null : (
     <Box mt="14px">
-      <FileInput id="input" type="file" onChange={handleFileChange} />
-      <Button
-        as="label"
-        colorScheme="teal"
-        cursor="pointer"
-        htmlFor="input"
-        leftIcon={<PlusSquareIcon />}
-        size="lg"
-        variant="outline"
-      >
-        Select file
-      </Button>
+      <div {...getRootProps()}>
+        <input {...getInputProps()} />
+        <p>Drag 'n' drop some files here, or click to select files</p>
+      </div>
     </Box>
   );
 }
-
-const FileInput = styled.input`
-  height: 0.1px;
-  opacity: 0;
-  position: absolute;
-  width: 0.1px;
-`;

@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { fetchFile, FFmpeg } from '@ffmpeg/ffmpeg';
 import { Flex } from '@chakra-ui/react';
 import { framesRegex, convertedSizeRegex } from '../../utils/regex';
@@ -17,11 +17,10 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
     video && convertToGif();
   }, [video]);
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const onDrop = useCallback((acceptedFiles: File[]) => {
     setGif('');
-    const file = event.target.files?.item(0);
-    file && setVideo(file);
-  };
+    setVideo(acceptedFiles[0]);
+  }, []);
 
   const handleLowerQualityModeChange = () => {
     setIsLowerQualityModeEnabled(!isLowerQualityModeEnabled);
@@ -73,7 +72,7 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
         isConverting={isConverting}
         isLowerQualityModeEnabled={isLowerQualityModeEnabled}
       />
-      <SelectFileButton handleFileChange={handleFileChange} isConverting={isConverting} />
+      <SelectFileButton isConverting={isConverting} onDrop={onDrop} />
       <VideoSpinner isConverting={isConverting} numFramesProcessed={numFramesProcessed} />
       <DownloadButton gif={gif} convertedSize={convertedSize} />
     </Flex>
