@@ -1,4 +1,4 @@
-import { useDropzone } from 'react-dropzone';
+import { DropzoneState, useDropzone } from 'react-dropzone';
 import { Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 
@@ -33,12 +33,12 @@ const DropzoneContainer = styled.div<any>`
   min-width: 523px;
   top: 20px;
   left: 20px;
-  z-index: ${({ isDragActive }) => (isDragActive ? '10' : '-10')};
+  z-index: 10;
   border-width: 2px;
   border-radius: 2px;
   border-color: ${(props) => getBorderColor(props)};
   border-style: dashed;
-  background-color: ${({ isDragActive }) => (isDragActive ? '#fafafa' : '#ffffff')};
+  background-color: ${({ isDragActive }) => (isDragActive ? '#fafafa' : 'transparent')};
   color: #bdbdbd;
   outline: none;
   transition: border 0.24s ease-in-out;
@@ -50,7 +50,7 @@ const DropMessage = styled.div`
   top: 200px;
 `;
 
-const getBorderColor = ({ isDragAccept, isDragReject, isDragActive }: any) => {
+const getBorderColor = ({ isDragAccept, isDragReject, isDragActive }: DropzoneState) => {
   if (isDragAccept) {
     return '#00e676';
   }
