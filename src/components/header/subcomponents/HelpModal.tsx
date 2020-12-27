@@ -14,6 +14,7 @@ import { InfoOutlineIcon } from '@chakra-ui/icons';
 
 export default function SelectFileButton({ isConverting }: { isConverting: boolean }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   return isConverting ? null : (
     <Box>
       <Box as="button" outline="none">

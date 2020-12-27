@@ -2,7 +2,7 @@ import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { fetchFile, FFmpeg } from '@ffmpeg/ffmpeg';
 import { Flex } from '@chakra-ui/react';
 import { framesRegex, convertedSizeRegex } from 'utils/regex';
-import { DownloadButton, FileDropzone, SelectFileButton, VideoSpinner } from './subcomponents';
+import { DownloadSection, FileDropzone, SelectFileButton, VideoSpinner } from './subcomponents';
 import Header from 'components/header/Header';
 
 export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
@@ -87,7 +87,7 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
         handleSelectFileChange={handleSelectFileChange}
       />
       <VideoSpinner isConverting={isConverting} numFramesProcessed={numFramesProcessed} />
-      <DownloadButton gif={gif} convertedSize={convertedSize} />
+      <DownloadSection gif={gif} convertedSize={convertedSize} />
     </Flex>
   );
 }

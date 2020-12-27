@@ -7,17 +7,17 @@ import AppSpinner from 'components/core/AppSpinner';
 const ffmpeg = createFFmpeg({ log: true });
 
 function App() {
-  const [isReady, setIsReady] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const loadConverter = async () => {
       await ffmpeg.load();
-      setIsReady(true);
+      setIsLoaded(true);
     };
     loadConverter();
   }, []);
 
-  return isReady ? (
+  return isLoaded ? (
     <Box maxW="600px" overflow="hidden" padding="25px">
       <Converter ffmpeg={ffmpeg} />
     </Box>
