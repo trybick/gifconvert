@@ -1,6 +1,9 @@
 import {
   Box,
   Button,
+  Heading,
+  Link,
+  ListItem,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -8,9 +11,10 @@ import {
   ModalFooter,
   ModalBody,
   ModalCloseButton,
+  UnorderedList,
   useDisclosure,
 } from '@chakra-ui/react';
-import { InfoOutlineIcon } from '@chakra-ui/icons';
+import { ExternalLinkIcon, InfoOutlineIcon } from '@chakra-ui/icons';
 
 export default function SelectFileButton({ isConverting }: { isConverting: boolean }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -24,9 +28,22 @@ export default function SelectFileButton({ isConverting }: { isConverting: boole
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Tray Gif</ModalHeader>
+          <ModalHeader>How to Use</ModalHeader>
           <ModalCloseButton outline="none" />
-          <ModalBody>Hello here is some text</ModalBody>
+          <ModalBody>
+            <UnorderedList>
+              <ListItem>Click 'Select File' or drop a file anywhere in the window </ListItem>
+              <ListItem>The conversion to GIF will begin automatically </ListItem>
+              <ListItem>Click 'Download GIF' and choose where to save it</ListItem>
+              <ListItem>Repeat!</ListItem>
+            </UnorderedList>
+
+            <Box mt="18px" textAlign="right">
+              <Link href="https://github.com/trybick/gif-tray" isExternal>
+                More info <ExternalLinkIcon mx="2px" />
+              </Link>
+            </Box>
+          </ModalBody>
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={onClose}>
               Close
