@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Heading,
   Link,
   ListItem,
   Modal,
@@ -30,6 +29,7 @@ export default function SelectFileButton({ isConverting }: { isConverting: boole
         <ModalContent>
           <ModalHeader>How to Use</ModalHeader>
           <ModalCloseButton outline="none" />
+
           <ModalBody>
             <UnorderedList>
               <ListItem>Click 'Select File' or drop a file anywhere in the window </ListItem>
@@ -37,17 +37,17 @@ export default function SelectFileButton({ isConverting }: { isConverting: boole
               <ListItem>Click 'Download GIF' and choose where to save it</ListItem>
               <ListItem>Repeat!</ListItem>
             </UnorderedList>
-
-            <Box mt="18px" textAlign="right">
-              <Link href="https://github.com/trybick/gif-tray" isExternal>
-                More info <ExternalLinkIcon mx="2px" />
-              </Link>
-            </Box>
           </ModalBody>
+
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
+            <Button colorScheme="teal" mr={3} onClick={onClose}>
               Close
             </Button>
+            <Link href="https://github.com/trybick/gif-tray" isExternal>
+              <Button variant="ghost">
+                More info <ExternalLinkIcon mx="2px" />
+              </Button>
+            </Link>
           </ModalFooter>
         </ModalContent>
       </Modal>

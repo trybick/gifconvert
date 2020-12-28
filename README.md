@@ -10,6 +10,7 @@ Convert video files to GIFs with just a few clicks.
 ## Features
 
 - Supports macOS desktop
+- Fast conversion using WebAssembly ffmpeg
 - Drag n' drop capable
 - Lives in the menu bar/tray
 - 'Low quality' mode for larger files
@@ -23,7 +24,7 @@ Convert video files to GIFs with just a few clicks.
 
 ## Technologies
 
-This is an `electron` app with a `create-react-app` running inside it. `chakra-ui` is being used as a component library and for styling and i's all `typescript`!
+This is an `electron` app with a `create-react-app` running inside it. `chakra-ui` is being used as a component library and for styling and it's all `typescript`!
 
 Also including:
 

@@ -32,7 +32,7 @@ export default function LowerQualityModeSwitch({
           </FormLabel>
         </Tooltip>
         <Switch
-          colorScheme="green"
+          colorScheme="teal"
           id="quality-switch"
           isChecked={isChecked}
           onChange={handleLowerQualityModeChange}
