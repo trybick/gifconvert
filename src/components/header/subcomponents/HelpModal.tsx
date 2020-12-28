@@ -24,7 +24,7 @@ export default function SelectFileButton({ isConverting }: { isConverting: boole
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>TrayGif</ModalHeader>
+          <ModalHeader>Tray Gif</ModalHeader>
           <ModalCloseButton outline="none" />
           <ModalBody>Hello here is some text</ModalBody>
           <ModalFooter>

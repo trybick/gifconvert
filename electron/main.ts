@@ -48,14 +48,14 @@ function createMainWindow() {
 function createTray() {
   const contextMenu = Menu.buildFromTemplate([
     {
-      label: 'Show TrayGif',
+      label: 'Show Tray Gif',
       click: async () => {
         mainWindow.show();
       },
     },
     { type: 'separator' },
     {
-      label: 'Quit TrayGif',
+      label: 'Quit Tray Gif',
       click: async () => {
         app.quit();
       },
@@ -67,7 +67,7 @@ function createTray() {
   const resizedTrayIcon = ogTrayIcon.resize({ width: 16, height: 16 });
 
   tray = new Tray(resizedTrayIcon);
-  tray.setToolTip('TrayGif');
+  tray.setToolTip('Tray Gif');
   tray.setIgnoreDoubleClickEvents(true);
 
   tray.on('click', () => {
