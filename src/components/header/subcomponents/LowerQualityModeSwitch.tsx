@@ -9,7 +9,7 @@ export default function LowerQualityModeSwitch({
   isChecked: boolean;
   isConverting: boolean;
 }) {
-  return isConverting ? null : (
+  return !isConverting ? (
     <Box>
       <FormControl alignItems="center" display="flex" justifyContent="flex-end" mb="25px">
         <Tooltip
@@ -40,5 +40,5 @@ export default function LowerQualityModeSwitch({
         />
       </FormControl>
     </Box>
-  );
+  ) : null;
 }

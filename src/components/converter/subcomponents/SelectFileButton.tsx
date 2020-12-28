@@ -9,12 +9,12 @@ export default function SelectFileButton({
   handleSelectFileChange,
   isConverting,
 }: {
-  handleSelectFileChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleSelectFileChange: (event: ChangeEvent<HTMLInputElement>) => void;
   isConverting: boolean;
 }) {
   const [isDropActive] = useRecoilState(isDropActiveState);
 
-  return isConverting ? null : (
+  return !isConverting ? (
     <Box mt="14px" zIndex={isDropActive ? '0' : '11'}>
       <FileInput id="input" type="file" onChange={handleSelectFileChange} />
       <Button
@@ -29,7 +29,7 @@ export default function SelectFileButton({
         Select file
       </Button>
     </Box>
-  );
+  ) : null;
 }
 
 const FileInput = styled.input`

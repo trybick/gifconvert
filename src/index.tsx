@@ -11,7 +11,7 @@ const globalStyles = css`
   }
 `;
 
-ReactDOM.render(
+const rendereredApp = (
   <StrictMode>
     <ChakraProvider>
       <Global styles={globalStyles} />
@@ -19,6 +19,7 @@ ReactDOM.render(
         <App />
       </RecoilRoot>
     </ChakraProvider>
-  </StrictMode>,
-  document.getElementById('root')
+  </StrictMode>
 );
+
+ReactDOM.render(rendereredApp, document.getElementById('root'));
