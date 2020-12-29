@@ -1,7 +1,8 @@
-import { app, BrowserWindow, Menu, nativeImage, Tray } from 'electron';
+import { app, BrowserWindow, Menu, Tray } from 'electron';
 import * as path from 'path';
 import * as isDev from 'electron-is-dev';
 import installExtension, { REACT_DEVELOPER_TOOLS } from 'electron-devtools-installer';
+import appIcon from './helpers/appIcon';
 
 let mainWindow: BrowserWindow;
 let tray: Tray | null = null;
@@ -64,11 +65,7 @@ function createTray() {
     },
   ]);
 
-  const iconPath = path.join(__dirname, '/images/tray-icon.png');
-  const ogTrayIcon = nativeImage.createFromPath(iconPath);
-  const resizedTrayIcon = ogTrayIcon.resize({ width: 16, height: 16 });
-
-  tray = new Tray(resizedTrayIcon);
+  tray = new Tray(appIcon);
   tray.setToolTip('Tray Gif');
   tray.setIgnoreDoubleClickEvents(true);
 

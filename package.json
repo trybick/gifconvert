@@ -10,8 +10,8 @@
     "postinstall": "electron-builder install-app-deps",
     "bundle-images": "mkdir -p ./build/electron/images && cp -r ./electron/images ./build/electron/",
     "electron:dev": "yarn bundle-images && concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:4002 && tsc -p electron -w\" \"wait-on http://localhost:4002 && tsc -p electron && electron .\"",
-    "electron:build": "yarn build && tsc -p electron && electron-builder",
-    "electron:pack": "yarn build && tsc -p electron && electron-builder --dir",
+    "electron:build-all": "yarn build && yarn bundle-images && tsc -p electron && electron-builder",
+    "electron:build-app": "yarn build && yarn bundle-images && tsc -p electron && electron-builder --dir",
     "format": "eslint --fix --ext .tsx,.js,.ts ."
   },
   "build": {
@@ -21,6 +21,9 @@
     ],
     "directories": {
       "buildResources": "assets"
+    },
+    "mac": {
+      "icon": "./build/electron/images/icon.png"
     }
   },
   "dependencies": {
