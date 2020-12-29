@@ -16,7 +16,7 @@ export default function SelectFileButton({
 
   return !isConverting ? (
     <Box mt="14px" zIndex={isDropActive ? '0' : '11'}>
-      <FileInput id="input" type="file" onChange={handleSelectFileChange} />
+      <FileInput id="input" onChange={handleSelectFileChange} type="file" />
       <Button
         as="label"
         colorScheme="teal"

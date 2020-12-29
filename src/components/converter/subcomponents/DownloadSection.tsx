@@ -26,7 +26,7 @@ export default function DownloadButton({
           <Text fontSize="14px" fontWeight="500" mt="0px">
             Size: {getconvertedSizeForDisplay()}
           </Text>
-          <Link href={gif} mt="12px" textDecor="none" _hover={{ textDecoration: 'none' }} download>
+          <Link _hover={{ textDecoration: 'none' }} href={gif} mt="12px" textDecor="none" download>
             <Button colorScheme="teal" height="4rem" leftIcon={<DownloadIcon />} size="lg">
               Download GIF
             </Button>

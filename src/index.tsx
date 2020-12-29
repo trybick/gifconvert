@@ -2,7 +2,7 @@ import { StrictMode } from 'react';
 import { RecoilRoot } from 'recoil';
 import ReactDOM from 'react-dom';
 import { ChakraProvider } from '@chakra-ui/react';
-import { Global, css } from '@emotion/react';
+import { css, Global } from '@emotion/react';
 import App from './App';
 
 const globalStyles = css`

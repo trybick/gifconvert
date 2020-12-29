@@ -1,7 +1,7 @@
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { fetchFile, FFmpeg } from '@ffmpeg/ffmpeg';
 import { Flex } from '@chakra-ui/react';
-import { framesRegex, convertedSizeRegex } from 'utils/regex';
+import { convertedSizeRegex, framesRegex } from 'utils/regex';
 import { DownloadSection, FileDropzone, SelectFileButton, VideoSpinner } from './subcomponents';
 import Header from 'components/header/Header';
 
@@ -81,13 +81,13 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
         isConverting={isConverting}
         isLowerQualityModeEnabled={isLowerQualityModeEnabled}
       />
-      <FileDropzone isConverting={isConverting} handleDropFileChange={handleDropFileChange} />
+      <FileDropzone handleDropFileChange={handleDropFileChange} isConverting={isConverting} />
       <SelectFileButton
-        isConverting={isConverting}
         handleSelectFileChange={handleSelectFileChange}
+        isConverting={isConverting}
       />
       <VideoSpinner isConverting={isConverting} numFramesProcessed={numFramesProcessed} />
-      <DownloadSection gif={gif} convertedSize={convertedSize} />
+      <DownloadSection convertedSize={convertedSize} gif={gif} />
     </Flex>
   );
 }

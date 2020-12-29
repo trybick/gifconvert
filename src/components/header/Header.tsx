@@ -25,8 +25,8 @@ export default function Header({
       <HelpModal isConverting={isConverting} />
       <LowerQualityModeSwitch
         handleLowerQualityModeChange={handleLowerQualityModeChange}
-        isConverting={isConverting}
         isChecked={isLowerQualityModeEnabled}
+        isConverting={isConverting}
       />
     </Grid>
   );
