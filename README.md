@@ -13,7 +13,15 @@ Convert video files to GIFs with just a few clicks.
 - Fast conversion using WebAssembly ffmpeg
 - Drag n' drop capable
 - Lives in the menu bar/tray
-- 'Low quality' mode for larger files
+- Multiple quality modes
+
+## Download & Installation
+
+- Click **[download link](https://drive.google.com/drive/folders/1zjXSYnS3oQuC_QNdmfFgwpM21LPnaus5?usp=sharing)** and download the app
+- Open the `dmg` file and drag Tray Gif to _Applications_
+- Open Tray Gif
+- **Click 'Cancel' on the security warning that appears**
+- Go to _System Preferences --> Security & Privacy_ and click 'Open Anyway'
 
 ## How to Use
 
