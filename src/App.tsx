@@ -3,6 +3,7 @@ import { createFFmpeg } from '@ffmpeg/ffmpeg';
 import { Box } from '@chakra-ui/react';
 import Converter from 'components/converter/Converter';
 import AppSpinner from 'components/core/AppSpinner';
+import { isElectron } from 'utils/env';
 
 const ffmpeg = createFFmpeg({ log: true });
 
@@ -18,7 +19,7 @@ function App() {
   }, []);
 
   return isLoaded ? (
-    <Box maxW="600px" overflow="hidden" padding="25px">
+    <Box m={isElectron ? '' : '0 auto'} maxW="600px" overflow="hidden" padding="25px">
       <Converter ffmpeg={ffmpeg} />
     </Box>
   ) : (
