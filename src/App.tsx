@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { createFFmpeg } from '@ffmpeg/ffmpeg';
 import { Box } from '@chakra-ui/react';
+import styled from '@emotion/styled';
 import Converter from 'components/converter/Converter';
 import AppSpinner from 'components/core/AppSpinner';
+import { isElectron } from 'utils/env';
 
 const ffmpeg = createFFmpeg({ log: true });
 
@@ -18,12 +20,25 @@ function App() {
   }, []);
 
   return isLoaded ? (
-    <Box m="0 auto" maxW="600px" overflow="hidden" padding="25px">
+    <AppWrapper>
       <Converter ffmpeg={ffmpeg} />
-    </Box>
+    </AppWrapper>
   ) : (
     <AppSpinner />
   );
 }
 
 export default App;
+
+const AppWrapper = styled(Box)`
+  margin: 0 auto;
+  max-width: 600px;
+  overflow: hidden;
+  padding: 25px;
+  ${!isElectron &&
+  `
+    background-color: white;
+    border: 2px solid grey;
+    border-radius: 34px;
+`}
+`;

@@ -4,6 +4,7 @@ import { DropzoneState, useDropzone } from 'react-dropzone';
 import { Text } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import { isDropActiveState } from 'recoil/atoms';
+import { isElectron } from 'utils/env';
 
 export default function FileDropzone({
   isConverting,
@@ -43,12 +44,10 @@ export default function FileDropzone({
 
 const DropzoneContainer = styled.div<any>`
   position: absolute;
-  min-height: 495px;
-  min-width: 523px;
-  top: 20px;
-  left: 20px;
+  top: 0px;
+  left: 0px;
   z-index: 10;
-  border-width: 2px;
+  border-width: ${({ isDragActive }) => (isDragActive ? '2px' : '')};
   border-radius: 2px;
   border-color: ${(props) => getBorderColor(props)};
   border-style: dashed;
@@ -56,11 +55,14 @@ const DropzoneContainer = styled.div<any>`
   color: #bdbdbd;
   outline: none;
   transition: border 0.24s ease-in-out;
+  min-height: 480px;
+  min-width: ${isElectron ? '512px' : '550px'};
+  }
 `;
 
 const DropMessage = styled.div`
   position: absolute;
-  left: 150px;
+  left: ${isElectron ? '150px' : '175px'};
   top: 200px;
 `;
 

@@ -75,7 +75,7 @@ export default function Converter({ ffmpeg }: { ffmpeg: FFmpeg }) {
   };
 
   return (
-    <Flex alignItems="center" direction="column">
+    <Flex alignItems="center" direction="column" minH="480px" position="relative">
       <Header
         handleLowerQualityModeChange={handleLowerQualityModeChange}
         isConverting={isConverting}
