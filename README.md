@@ -3,9 +3,9 @@
 Convert video files to GIFs with just a few clicks.
 
 <!-- ADD IMAGE -->
-<!-- <p align="center">
-  <img src="" alt="app screenshot">
-</p> -->
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/39889198/103387935-7d430b00-4ad4-11eb-844a-47d2262c476b.gif" alt="app screenshot" width="500px">
+</p>
 
 ## Features
 
