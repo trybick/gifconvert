@@ -4,7 +4,7 @@ Convert video files to GIFs with just a few clicks.
 
 **Run in your browser [here](https://gifconvert.com)**
 
-**Download the macOS app [here](https://drive.google.com/drive/folders/1zjXSYnS3oQuC_QNdmfFgwpM21LPnaus5?usp=sharing)**
+**Download the macOS app [here](https://github.com/trybick/gifconvert/releases)**
 
 <!-- ADD IMAGE -->
 <p align="center">
@@ -21,7 +21,7 @@ Convert video files to GIFs with just a few clicks.
 
 You can use the app in your web browser **[here](https://gifconvert.com)** or follow these instructions to install the app for macOS:
 
-- Click **[download link](https://drive.google.com/drive/folders/1zjXSYnS3oQuC_QNdmfFgwpM21LPnaus5?usp=sharing)** and download the app
+- Click **[download link](https://github.com/trybick/gifconvert/releases)** and download the `dmg` file
 - Open the `dmg` file and drag Gif Convert to _Applications_
 - Open Gif Convert
 - **Click 'Cancel' on the security warning that appears**
