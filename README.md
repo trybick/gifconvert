@@ -1,4 +1,4 @@
-# Tray Gif
+# Gif Convert
 
 Convert video files to GIFs with just a few clicks.
 
@@ -18,8 +18,8 @@ Convert video files to GIFs with just a few clicks.
 ## Download & Installation
 
 - Click **[download link](https://drive.google.com/drive/folders/1zjXSYnS3oQuC_QNdmfFgwpM21LPnaus5?usp=sharing)** and download the app
-- Open the `dmg` file and drag Tray Gif to _Applications_
-- Open Tray Gif
+- Open the `dmg` file and drag Gif Convert to _Applications_
+- Open Gif Convert
 - **Click 'Cancel' on the security warning that appears**
 - Go to _System Preferences --> Security & Privacy_ and click 'Open Anyway'
 

@@ -43,7 +43,7 @@ export default function SelectFileButton({ isConverting }: { isConverting: boole
             <Button colorScheme="teal" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Link href="https://github.com/trybick/gif-tray" isExternal>
+            <Link href="https://github.com/trybick/gifconvert" isExternal>
               <Button variant="ghost">
                 More info <ExternalLinkIcon mx="2px" />
               </Button>

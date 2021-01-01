@@ -51,14 +51,14 @@ function createMainWindow() {
 function createTray() {
   const contextMenu = Menu.buildFromTemplate([
     {
-      label: 'Show Tray Gif',
+      label: 'Show Gif Convert',
       click: async () => {
         mainWindow.show();
       },
     },
     { type: 'separator' },
     {
-      label: 'Quit Tray Gif',
+      label: 'Quit Gif Convert',
       click: async () => {
         app.quit();
       },
@@ -66,7 +66,7 @@ function createTray() {
   ]);
 
   tray = new Tray(appIcon);
-  tray.setToolTip('Tray Gif');
+  tray.setToolTip('Gif Convert');
   tray.setIgnoreDoubleClickEvents(true);
 
   tray.on('click', () => {
