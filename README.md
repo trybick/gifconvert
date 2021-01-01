@@ -2,20 +2,24 @@
 
 Convert video files to GIFs with just a few clicks.
 
+**Run in your browser [here](https://gifconvert.com)**
+
+**Download the macOS app [here](https://drive.google.com/drive/folders/1zjXSYnS3oQuC_QNdmfFgwpM21LPnaus5?usp=sharing)**
+
 <!-- ADD IMAGE -->
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/39889198/103387935-7d430b00-4ad4-11eb-844a-47d2262c476b.gif" alt="app screenshot" width="500px">
+  <img src="https://user-images.githubusercontent.com/39889198/103387935-7d430b00-4ad4-11eb-844a-47d2262c476b.gif" alt="app screenshot" width="450px">
 </p>
 
 ## Features
 
-- Supports macOS desktop
 - Fast conversion using WebAssembly ffmpeg
 - Drag n' drop capable
-- Lives in the menu bar/tray
 - Multiple quality modes
 
-## Download & Installation
+## macOS App Installation
+
+You can use the app in your web browser **[here](https://gifconvert.com)** or follow these instructions to install the app for macOS:
 
 - Click **[download link](https://drive.google.com/drive/folders/1zjXSYnS3oQuC_QNdmfFgwpM21LPnaus5?usp=sharing)** and download the app
 - Open the `dmg` file and drag Gif Convert to _Applications_
@@ -27,12 +31,12 @@ Convert video files to GIFs with just a few clicks.
 
 - Click 'Select File' or drop a file anywhere in the window
 - The conversion to GIF will begin automatically
-- Click 'Download GIF' and choose where to save it
+- Click 'Download GIF'
 - Repeat!
 
 ## Technologies
 
-This is an `electron` app with a `create-react-app` running inside it. `chakra-ui` is being used as a component library and for styling and it's all `typescript`!
+This is an `electron` app with a `create-react-app` and running inside it. `chakra-ui` is being used for styling and everything is written in `typescript`.
 
 Also including:
 
@@ -45,6 +49,7 @@ Also including:
 To run the application locally:
 
 ```terminal
-yarn
-yarn electron:dev
+yarn                # install packages
+yarn electron:dev   # start electron app
+yarn browser:start  # start browser-only mode
 ```

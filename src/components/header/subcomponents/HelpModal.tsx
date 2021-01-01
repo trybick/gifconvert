@@ -34,7 +34,7 @@ export default function SelectFileButton({ isConverting }: { isConverting: boole
             <UnorderedList>
               <ListItem>Click 'Select File' or drop a file anywhere in the window </ListItem>
               <ListItem>The conversion to GIF will begin automatically </ListItem>
-              <ListItem>Click 'Download GIF' and choose where to save it</ListItem>
+              <ListItem>Click 'Download GIF'</ListItem>
               <ListItem>Repeat!</ListItem>
             </UnorderedList>
           </ModalBody>
