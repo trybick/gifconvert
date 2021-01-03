@@ -19,18 +19,34 @@ function App() {
     loadConverter();
   }, []);
 
-  return isLoaded ? (
-    <AppWrapper>
-      <Converter ffmpeg={ffmpeg} />
-    </AppWrapper>
-  ) : (
-    <AppSpinner />
+  return (
+    <FullPageBackground>
+      {isLoaded ? (
+        <ConverterWrapper>
+          <Converter ffmpeg={ffmpeg} />
+        </ConverterWrapper>
+      ) : (
+        <AppSpinner />
+      )}
+    </FullPageBackground>
   );
 }
 
 export default App;
 
-const AppWrapper = styled(Box)`
+const FullPageBackground = styled(Box)`
+  ${!isElectron &&
+  `
+  background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+`}
+`;
+
+const ConverterWrapper = styled(Box)`
   margin: 0 auto;
   max-width: 600px;
   overflow: hidden;
@@ -40,5 +56,7 @@ const AppWrapper = styled(Box)`
     background-color: white;
     border: 2px solid grey;
     border-radius: 34px;
+    margin-top: 25px;
+    width: 600px;
 `}
 `;
