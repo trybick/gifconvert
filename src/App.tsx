@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { createFFmpeg } from '@ffmpeg/ffmpeg';
+import { isMobile } from 'react-device-detect';
 import { Box } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import Converter from 'components/converter/Converter';
@@ -18,6 +19,10 @@ function App() {
     };
     loadConverter();
   }, []);
+
+  if (isMobile) {
+    return <div>This content is unavailable on mobile devices.</div>;
+  }
 
   return (
     <FullPageBackground>
