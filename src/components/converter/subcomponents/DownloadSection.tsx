@@ -19,7 +19,7 @@ export default function DownloadButton({
 
   return gif ? (
     <Box zIndex={isDropActive ? '0' : '11'}>
-      <Divider borderWidth="1px" maxW="310px" mt="20px" opactiy="1" />
+      <Divider borderWidth="1px" mt="20px" opactiy="1" />
       <Box mt="20px">
         <Image borderRadius="4px" height="200px" src={gif} />
         <Flex alignItems="center" direction="column" justifyContent="center" mt="12px">

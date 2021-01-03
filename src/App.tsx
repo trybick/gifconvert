@@ -56,7 +56,6 @@ const ConverterWrapper = styled(Box)`
     background-color: white;
     border: 2px solid grey;
     border-radius: 34px;
-    margin-top: 25px;
     width: 600px;
 `}
 `;
