@@ -13,8 +13,7 @@ export default function FileDropzone({
   isConverting: boolean;
   handleDropFileChange: (acceptedFiles: File[]) => void;
 }) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isDropActive, setIsDropActive] = useRecoilState(isDropActiveState);
+  const [, setIsDropActive] = useRecoilState(isDropActiveState);
   const { getRootProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
     accept: 'video/*',
     maxFiles: 1,
