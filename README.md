@@ -2,7 +2,7 @@
 
 Convert video files to GIFs with just a few clicks.
 
-**Run in your browser [here](https://gifconvert.com)**
+**Run in your browser [here](https://convertgif.netlify.app)**
 
 **Download the macOS app [here](https://github.com/trybick/gifconvert/releases)**
 
@@ -19,7 +19,7 @@ Convert video files to GIFs with just a few clicks.
 
 ## macOS App Installation
 
-You can use the app in your web browser **[here](https://gifconvert.com)** or follow these instructions to install the app for macOS:
+You can use the app in your web browser **[here](https://convertgif.netlify.app)** or follow these instructions to install the app for macOS:
 
 - Click **[download link](https://github.com/trybick/gifconvert/releases)** and download the `dmg` file
 - Open the `dmg` file and drag Gif Convert to _Applications_
